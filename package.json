@@ -1,0 +1,16 @@
+{
+  "name": "jetpax",
+  "version": "0.0.0",
+  "description": "pragmatic development environment management",
+  "repository": "andyfleming/jetpax",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "np"
+  },
+  "author": "Andy Fleming <andy@andyfleming.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "np": "^3.1.0"
+  }
+}
