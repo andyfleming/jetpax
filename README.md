@@ -4,13 +4,13 @@ Pragmatic development environment manager (intended for supporting a local devel
 
 ## Installing
 
-```javascript
+```bash
 npm install -g jetpax
 ```
 
 Verify installation with the following command:
 
-```javascript
+```bash
 jpx version
 ```
 
