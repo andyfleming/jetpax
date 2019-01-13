@@ -4,6 +4,9 @@
   "description": "pragmatic development environment management",
   "repository": "andyfleming/jetpax",
   "main": "index.js",
+  "bin": {
+    "jpx": "index.js"
+  },
   "scripts": {
     "test": "echo \"Tests not set up yet.\"",
     "release": "np"
