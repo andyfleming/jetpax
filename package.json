@@ -1,6 +1,6 @@
 {
   "name": "jetpax",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "pragmatic development environment management",
   "repository": "andyfleming/jetpax",
   "main": "index.js",
