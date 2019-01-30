@@ -14,8 +14,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "build:ci": "CI=true SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "test": "SKIP_PREFLIGHT_CHECK=true react-scripts test",
+    "test:ci": "CI=true SKIP_PREFLIGHT_CHECK=true react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
