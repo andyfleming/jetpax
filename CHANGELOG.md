@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Linking of `jpx` as global command
+- User interface (as future home for service statuses, etc)
+- User interface application wrapper
 - Contributor Tools
     - `CONTRIBUTING.md` to document development and releasing workflow
     - `start` command at top level for running and watching server (for development)
