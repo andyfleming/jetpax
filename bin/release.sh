@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 # Clean up build artifacts
 rm -rf build
 rm -rf ui/build
