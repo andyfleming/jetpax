@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Server with test API endpoint
     - UI foundation (from `create-react-app` with `--typescript`)
     - Typescript to base project
+    - Proxying for API for UI in development mode (via `proxy` option in `package.json` of UI)
+
 
 ## [0.0.2] - 2019-01-13
 ### Added
