@@ -12,7 +12,7 @@ npm run build
 
 # Test and build react project
 cd ui
-SKIP_PREFLIGHT_CHECK=true npm test # similar to https://stackoverflow.com/questions/53089122/issue-with-babel-jest-dependency-when-running-npm-start-in-a-react-app
+CI=true SKIP_PREFLIGHT_CHECK=true npm test  -- --ci # similar to https://stackoverflow.com/questions/53089122/issue-with-babel-jest-dependency-when-running-npm-start-in-a-react-app
 npm run build
 
 cd ..
