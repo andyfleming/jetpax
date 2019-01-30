@@ -32,6 +32,7 @@
   "files": [
     "build/**/*",
     "ui/build/**/*",
+    "ui/public/**/*",
     "CHANGELOG.md",
     "README.md",
     "!.*.swp",
