@@ -3,9 +3,8 @@
   "version": "0.0.2",
   "description": "pragmatic development environment management",
   "repository": "andyfleming/jetpax",
-  "main": "index.js",
   "bin": {
-    "jpx": "index.js"
+    "jpx": "build/Cli/run-cli.js"
   },
   "scripts": {
     "start": "ts-node-dev --respawn --transpileOnly src/Server/run-server.ts",

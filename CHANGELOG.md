@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Contributor Tools
     - `CONTRIBUTING.md` to document development and releasing workflow
     - `start` command at top level for running and watching server (for development)
+    - More robust `release.sh` script
+    - `cli.sh` script for dynamically running CLI TypeScript source
 - Project internals
     - Custom .npmignore
     - Shebang for CLI entrypoint
