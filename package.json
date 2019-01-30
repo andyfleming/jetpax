@@ -28,5 +28,23 @@
     "carlo": "^0.9.43",
     "daemonize-process": "^2.0.1",
     "express": "^4.16.4"
-  }
+  },
+  "files": [
+    "build/**/*",
+    "ui/build/**/*",
+    "CHANGELOG.md",
+    "README.md",
+    "!.*.swp",
+    "!._*",
+    "!.DS_Store",
+    "!.git",
+    "!.hg",
+    "!.npmrc",
+    "!.lock-wscript",
+    "!.svn",
+    "!.wafpickle-*",
+    "!config.gypi",
+    "!CVS",
+    "!npm-debug.log"
+  ]
 }
