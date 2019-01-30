@@ -9,10 +9,10 @@ console.log('Hello from Jetpax in TypeScript')
 daemonizeProcess()
 
 async function run() {
-    //const icon = fs.readFileSync('./ui/public/jetpax-app-icon.png')
+    const icon = fs.readFileSync('./ui/public/jetpax-app-icon.png')
     const options = {
-        channel: 'r599034', // ( Version 71.0.3578.98 looked up on http://omahaproxy.appspot.com/ )
-        //icon,
+        channel: 'r626762', // ( Version 71.0.3578.98 looked up on http://omahaproxy.appspot.com/ )
+        icon,
         title: 'Jetpax',
     }
 
@@ -23,7 +23,7 @@ async function run() {
     app.on('exit', () => process.exit())
 
     // Navigate to the main page of your app.
-    await app.load('https://localhost:8777')
+    await app.load('http://localhost:8777')
 
 }
 

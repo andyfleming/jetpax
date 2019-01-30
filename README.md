@@ -1,6 +1,9 @@
+<img src="ui/public/jetpax-app-icon.png" alt="Jetpax App icon" width="128" />
+
 # Jetpax
 
 Pragmatic development environment manager (intended for supporting a local development environment).
+
 
 ## Prerequisites
 
