@@ -1,4 +1,4 @@
-<img src="ui/public/jetpax-app-icon.png" alt="Jetpax App icon" width="180" align="right" />
+<img src="ui/public/jetpax-app-icon.png" alt="Jetpax App icon" width="180" />
 
 # Jetpax
 
