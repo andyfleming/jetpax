@@ -8,12 +8,23 @@
     "jpx": "index.js"
   },
   "scripts": {
+    "start": "ts-node-dev --respawn --transpileOnly src/Server/run-server.ts",
+    "build": "tsc",
     "test": "echo \"Tests not set up yet.\"",
     "release": "np"
   },
   "author": "Andy Fleming <andy@andyfleming.com>",
   "license": "MIT",
   "devDependencies": {
-    "np": "^3.1.0"
+    "@types/express": "^4.16.1",
+    "@types/node": "^10.12.19",
+    "np": "^3.1.0",
+    "ts-node-dev": "^1.0.0-pre.32",
+    "typescript": "^3.2.4"
+  },
+  "dependencies": {
+    "carlo": "^0.9.43",
+    "daemonize-process": "^2.0.1",
+    "express": "^4.16.4"
   }
 }

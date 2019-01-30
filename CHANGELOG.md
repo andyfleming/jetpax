@@ -6,9 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- Custom .npmignore
 - Linking of `jpx` as global command
-- Shebang for CLI entrypoint
+- Contributor Tools
+    - `CONTRIBUTING.md` to document development and releasing workflow
+    - `start` command at top level for running and watching server (for development)
+- Project internals
+    - Custom .npmignore
+    - Shebang for CLI entrypoint
+    - Server with test API endpoint
+    - UI foundation (from `create-react-app` with `--typescript`)
+    - Typescript to base project
 
 ## [0.0.2] - 2019-01-13
 ### Added
