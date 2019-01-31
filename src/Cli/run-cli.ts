@@ -1,33 +1,33 @@
 #! /usr/bin/env node
 
-const carlo = require('carlo')
-const daemonizeProcess = require('daemonize-process')
-const fs = require('fs')
-const path = require('path')
+import chalk from 'chalk'
+import splitArgs from "./ArgumentParsing/splitArgs"
+import getCommand from "./SubCommands/getCommand"
 
-console.log('Hello from Jetpax in TypeScript')
+async function runCli() {
+    const [subCommand, ...args] = process.argv.slice(2)
 
-// TODO: we may want to make sure the server is running before we start the UI
-
-daemonizeProcess()
-
-async function run() {
-    const icon = fs.readFileSync(path.join(__dirname, '../../ui/public/jetpax-app-icon.png'))
-    const options = {
-        channel: 'r626762', // ( Version 71.0.3578.98 looked up on http://omahaproxy.appspot.com/ )
-        icon,
-        title: 'Jetpax',
+    // If no argument is passed, it should run the default command
+    if (!subCommand) {
+        console.log()
+        console.log(` ${chalk.green('Jetpax')}`)
+        console.log()
+        console.log(` Run ${chalk.yellow('jpx help')} to see a list of available commands`)
     }
 
-    // Launch the browser.
-    const app = await carlo.launch(options)
+    const command = getCommand(subCommand)
 
-    // Terminate Node.js process on app window closing.
-    app.on('exit', () => process.exit())
+    if (command === null || command === undefined) {
+        console.log()
+        console.log(chalk.red(`Command "${subCommand}" not found.`))
+        console.log()
+        console.log(`Run ${chalk.yellow('jpx help')} to see a list of available commands.`)
+        console.log()
+        return
+    }
 
-    // Navigate to the main page of your app.
-    await app.load('http://localhost:8777')
-
+    await command.run(splitArgs(args))
 }
 
-run()
+
+runCli()

@@ -1,8 +1,6 @@
+import ArgsAndFlags from "./ArgsAndFlags"
 
-// Usage:
-// const {flags, args} = splitArgs(argv)
-
-function splitArgs(argv: string[]): {flags: string[], args: string[]} {
+function splitArgs(argv: string[]): ArgsAndFlags {
     const flags: string[] = []
     const args: string[] = []
 
