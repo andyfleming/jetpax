@@ -3,13 +3,16 @@
 const carlo = require('carlo')
 const daemonizeProcess = require('daemonize-process')
 const fs = require('fs')
+const path = require('path')
 
 console.log('Hello from Jetpax in TypeScript')
+
+// TODO: we may want to make sure the server is running before we start the UI
 
 daemonizeProcess()
 
 async function run() {
-    const icon = fs.readFileSync('./ui/public/jetpax-app-icon.png')
+    const icon = fs.readFileSync(path.join(__dirname, '../../ui/public/jetpax-app-icon.png'))
     const options = {
         channel: 'r626762', // ( Version 71.0.3578.98 looked up on http://omahaproxy.appspot.com/ )
         icon,
