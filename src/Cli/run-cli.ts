@@ -13,6 +13,7 @@ async function runCli() {
         console.log(` ${chalk.green('Jetpax')}`)
         console.log()
         console.log(` Run ${chalk.yellow('jpx help')} to see a list of available commands`)
+        return
     }
 
     const command = getCommand(subCommand)
