@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-./node_modules/.bin/ts-node src/Cli/run-cli.ts $@
+NODE_ENV=development ./node_modules/.bin/ts-node src/Cli/run-cli.ts $@

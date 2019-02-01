@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!--
 ## [Unreleased]
+### Added
+- `jpx ui` command
+- `jpx up` command (placeholder)
+- `jpx help` command
 -->
 
 ## [0.1.1] - 2019-01-30

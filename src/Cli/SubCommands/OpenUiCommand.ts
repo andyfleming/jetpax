@@ -4,28 +4,19 @@ import Command from "./Command"
 import fs from "fs"
 import path from "path"
 import chalk from "chalk"
+import serverIsOnline from "../Validation/serverIsOnline"
 const carlo = require('carlo')
-
-
-async function serverIsOnline() {
-    try {
-        const response = await axios.get("http://localhost:8777/api/online")
-
-        return (response.data === 'Jetpax Server API Online')
-    } catch (err) {
-        return false
-    }
-}
 
 const OpenUiCommand: Command = {
     name: 'ui',
     run: async () => {
         // Make sure the server is running before we start the UI
-        if (!serverIsOnline()) {
+        if (!await serverIsOnline()) {
             console.log()
-            console.log('Server is not online! Not starting UI.')
+            console.log(chalk.red(' Server offline!'))
+            console.log(' Not starting UI.')
             console.log()
-            console.log('Run "jpx up" to start the server.')
+            console.log(` Run ${chalk.yellow('jpx up')} to start the server.`)
             console.log()
             return
         }
