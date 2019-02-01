@@ -3,6 +3,17 @@
   "version": "0.1.1",
   "description": "pragmatic development environment management",
   "repository": "andyfleming/jetpax",
+  "keywords": [
+    "local-development",
+    "development",
+    "environment",
+    "process-management",
+    "docker",
+    "cli",
+    "ui",
+    "jetpax",
+    "jetpacks"
+  ],
   "bin": {
     "jpx": "build/Cli/run-cli.js"
   },
