@@ -5,8 +5,10 @@ const level = require('level')
 export default class LevelStore implements KeyValueStore {
     private db: any
 
-    constructor(location = `${jetpaxHome}/kv-db`) {
-        this.db = level(location)
+    constructor(private readonly location = `${jetpaxHome}/kv-db`) {}
+
+    async connect() {
+        this.db = await level(this.location)
 
         // On shutdown, close the db connection
         process.on('SIGTERM', () => {
@@ -30,4 +32,12 @@ export default class LevelStore implements KeyValueStore {
         this.db.del(key)
     }
 
+}
+
+export async function makeLevelStore(location?: string) {
+    const store = new LevelStore(location)
+
+    await store.connect()
+
+    return store
 }
