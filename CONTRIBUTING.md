@@ -16,7 +16,7 @@ npm start
 In the root of project, run
 
 ```
-./bin/cli.sh
+./bin/cli.sh help
 ```
 
 ## Developing the UI
