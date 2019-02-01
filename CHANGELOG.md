@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 -->
 
+## [0.2.1] - 2019-02-01
+### Fixed
+- Included files in published build
+
 ## [0.2.0] - 2019-02-01
 ### Added
 - `jpx up` command to start server

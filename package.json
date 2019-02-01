@@ -63,18 +63,6 @@
     "ui/build/**/*",
     "ui/public/**/*",
     "CHANGELOG.md",
-    "README.md",
-    "!.*.swp",
-    "!._*",
-    "!.DS_Store",
-    "!.git",
-    "!.hg",
-    "!.npmrc",
-    "!.lock-wscript",
-    "!.svn",
-    "!.wafpickle-*",
-    "!config.gypi",
-    "!CVS",
-    "!npm-debug.log"
+    "README.md"
   ]
 }
