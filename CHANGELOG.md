@@ -6,11 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!--
 ## [Unreleased]
-### Added
-- `jpx ui` command
-- `jpx up` command (placeholder)
-- `jpx help` command
 -->
+
+## [0.2.0] - 2019-02-01
+### Added
+- `jpx up` command to start server
+- `jpx ui` command to open UI in app
+- `jpx web` command to open UI in browser
+- `jpx help` command to list commands
+- Project internals
+    - LevelDB for persistent storage
+    - Logging for server
+    - Coverage for root project (excluding UI)
+    - Arg parsing
+    - Utilities for parsing CLI input
+    - Startup pre-flight script for server
+    - DI container with mock equivalent
 
 ## [0.1.1] - 2019-01-30
 ### Fixes
