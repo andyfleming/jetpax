@@ -21,8 +21,7 @@
     "start": "ts-node-dev --respawn --transpileOnly src/Server/run-server.ts",
     "build": "tsc",
     "test": "jest",
-    "coverage": "npm test -- --coverage",
-    "release": "np"
+    "coverage": "npm test -- --coverage"
   },
   "author": "Andy Fleming <andy@andyfleming.com>",
   "license": "MIT",
