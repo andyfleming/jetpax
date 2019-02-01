@@ -7,6 +7,11 @@ export default class LevelStore implements KeyValueStore {
 
     constructor(location = `${jetpaxHome}/kv-db`) {
         this.db = level(location)
+
+        // On shutdown, close the db connection
+        process.on('SIGTERM', () => {
+            this.db.close()
+        })
     }
 
     async get(key: string): Promise<any|undefined> {
