@@ -10,6 +10,7 @@
     "start": "ts-node-dev --respawn --transpileOnly src/Server/run-server.ts",
     "build": "tsc",
     "test": "jest",
+    "coverage": "npm test -- --coverage",
     "release": "np"
   },
   "author": "Andy Fleming <andy@andyfleming.com>",
