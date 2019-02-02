@@ -1,16 +1,11 @@
-import Logger from "../Logging/Logger"
-import {getLogger} from "./getLogger"
-import KeyValueStore from "../Persistence/KeyValueStore"
+import {makeLogger} from "../Logging/makeLogger"
 import {makeLevelStore} from "../Persistence/LevelStore"
+import Dependencies from "./Dependencies"
 
-export interface Dependencies {
-    logger: Logger
-    kv: KeyValueStore
-}
 
 export default async function getDependencies(): Promise<Dependencies> {
     return {
-        logger: await getLogger(),
+        logger: await makeLogger(),
         kv: await makeLevelStore(),
     }
 }

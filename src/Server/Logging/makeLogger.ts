@@ -1,11 +1,9 @@
+import pino, {Logger} from 'pino'
 import jetpaxHome from "../../Common/jetpaxHome"
 import fs from "fs"
 import {execSync} from "child_process"
-import Logger from "../Logging/Logger"
-import FileLogger from "../Logging/FileLogger"
-import ConsoleLogger from "../Logging/ConsoleLogger"
 
-async function getFileLogger() {
+async function makeFileLogger() {
     const logFilePath = `${jetpaxHome}/logs/server/server.log`
 
     // Start the log file if it doesn't already exists
@@ -19,14 +17,18 @@ async function getFileLogger() {
         fs.writeFileSync(logFilePath, '')
     }
 
-    return new FileLogger(logFilePath)
-
+    return pino({}, pino.destination(logFilePath))
 }
 
-export async function getLogger(): Promise<Logger> {
+export async function makeLogger(): Promise<Logger> {
+
+    // If we are running in the background, use the file logger
     if (process.env.RUN_CONTEXT === 'background') {
-        return await getFileLogger()
+        return await makeFileLogger()
     }
 
-    return await new ConsoleLogger()
+    // Otherwise, we'll print to stdout with the pretty print option/module
+    return pino({
+        prettyPrint: true,
+    })
 }

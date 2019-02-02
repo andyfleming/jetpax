@@ -1,10 +1,10 @@
-import {Dependencies} from "./getDependencies"
-import MockLogger from "../Logging/MockLogger"
+import pino from 'pino'
+import Dependencies from "./Dependencies"
 import InMemoryStore from "../Persistence/InMemoryStore"
 
 export default async function getMockDependencies(): Promise<Dependencies> {
     return {
-        logger: new MockLogger(),
+        logger: pino(),
         kv: new InMemoryStore(),
     }
 }

@@ -7,7 +7,7 @@ async function runServer() {
     const server = await makeServer(deps)
 
     server.listen(8777, () => {
-        console.log('Listening on 8777')
+        deps.logger.info('Listening on 8777')
     })
 
 }
