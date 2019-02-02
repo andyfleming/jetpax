@@ -4,7 +4,7 @@ import Command from "./Command"
 import fs from "fs"
 import path from "path"
 import chalk from "chalk"
-import serverIsOnline from "../Validation/serverIsOnline"
+import serverIsOnline from "../Telemetry/serverIsOnline"
 const carlo = require('carlo')
 
 const OpenUiCommand: Command = {

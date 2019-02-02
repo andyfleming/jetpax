@@ -1,6 +1,6 @@
 import {spawn} from 'child_process'
 import Command from "./Command"
-import serverIsOnline from "../Validation/serverIsOnline"
+import serverIsOnline from "../Telemetry/serverIsOnline"
 import chalk from "chalk"
 import path from "path"
 
@@ -11,12 +11,10 @@ const StartServerCommand: Command = {
         // Check that the server isn't already running
         if (await serverIsOnline()) {
             console.log()
-            console.log(chalk.yellow('Server is already online.'))
+            console.log(chalk.yellow(' Server is already online.'))
             console.log()
             return
         }
-
-        // TODO: If the server is offline, consider resetting the PID
 
         // Detect if we are in the dev environment (running via ts-node)
         const inDev = (process.env.NODE_ENV === 'development')
@@ -40,7 +38,11 @@ const StartServerCommand: Command = {
             }
         })
 
-        console.log(chalk.green(' Server started in background'))
+        console.log()
+        console.log(chalk.yellow(' Starting server in background...'))
+        console.log()
+        console.log(' (This may take a few moments, even after this command exits)')
+        console.log()
 
         process.exit(0)
 

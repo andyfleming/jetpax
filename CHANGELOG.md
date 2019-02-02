@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Compare links in `CHANGELOG.md`
+- Implementation of `jpx down` command to shut down server
 ### Changed
 - Output of default command message to have trailing space for readability
 ### Fixed

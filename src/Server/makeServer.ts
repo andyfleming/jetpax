@@ -16,6 +16,10 @@ const makeServer = async (deps: Dependencies) => {
         res.send('Jetpax Server API Online')
     })
 
+    server.get('/api/pid', (req, res) => {
+        res.send(`${process.pid}`)
+    })
+
     // ------------------------------------------------------------------------------------
 
     // Fallback for rewrite to index.html
