@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - UI Scaffolding
-- Implementing logging to file (`~/.jetpax/logging/server/server.log`) for Jetpax internals
+- Implementing logging to file (`~/.jetpax/logs/server/server.log`) for Jetpax internals
+- `jpx logs` command for tailing Jetpax server logs
 - Project internals
     - Added `pino` logger with pretty-print enabled for developing
 
