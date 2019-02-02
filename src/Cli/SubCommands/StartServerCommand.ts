@@ -29,23 +29,20 @@ const StartServerCommand: Command = {
         const args = (inDev) ? ['-r', 'ts-node/register', script] : [script]
 
         // Spawn in background and pipe output to log file
-        const child = spawn(process.execPath, args, {
+        spawn(process.execPath, args, {
             cwd: path.join(__dirname, '../../../'),
             detached: true,
             stdio: 'ignore',
             env: {
+                ...process.env,
                 NODE_ENV: (inDev) ? 'development' : 'production',
                 RUN_CONTEXT: 'background',
             }
         })
 
-        // Write the PID to file so we can later kill it on "down"
-        //process.kill(-child.pid)
-
-        // Please note - before pid. This converts a pid to a group of pids for process kill() method.
-        // https://azimi.me/2014/12/31/kill-child_process-node-js.html
-
         console.log(chalk.green(' Server started in background'))
+
+        process.exit(0)
 
     }
 }
