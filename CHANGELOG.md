@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Compare links in `CHANGELOG.md`
 ### Changed
 - Output of default command message to have trailing space for readability
+### Fixed
+- Shutdown behavior of server
 
 ## [0.2.1] - 2019-02-01
 ### Fixed

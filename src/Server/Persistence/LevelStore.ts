@@ -1,5 +1,6 @@
 import KeyValueStore from "./KeyValueStore"
 import jetpaxHome from "../../Common/jetpaxHome"
+import {registerShutdownTask} from "../Shutdown/runShutdownTasks"
 const level = require('level')
 
 export default class LevelStore implements KeyValueStore {
@@ -11,8 +12,8 @@ export default class LevelStore implements KeyValueStore {
         this.db = await level(this.location)
 
         // On shutdown, close the db connection
-        process.on('SIGTERM', () => {
-            this.db.close()
+        registerShutdownTask(async () => {
+            await this.db.close()
         })
     }
 
