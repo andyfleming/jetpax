@@ -1,15 +1,19 @@
 import express from 'express'
 import path from 'path'
+import {Server} from 'http'
+import socketIo from 'socket.io'
 import Dependencies from "./Dependencies/Dependencies"
 
 const makeServer = async (deps: Dependencies) => {
-    const server = express()
+    const app = express()
+    const server = new Server(app)
+    const io = socketIo(server)
 
-    // API Routes
+    // HTTP API Routes
     // ------------------------------------------------------------------------------------
 
     // Log API calls
-    server.use('/api/*', (req, res, next) => {
+    app.use('/api/*', (req, res, next) => {
 
         const onResFinished = function() {
             // @ts-ignore
@@ -37,25 +41,58 @@ const makeServer = async (deps: Dependencies) => {
         next()
     })
 
-    server.get('/api/online', (req, res) => {
+    app.get('/api/online', (req, res) => {
         res.send('Jetpax Server API Online')
     })
 
-    server.get('/api/pid', (req, res) => {
+    app.get('/api/pid', (req, res) => {
         res.send(`${process.pid}`)
     })
 
-    server.all('/api/*', (req, res) => {
+    app.all('/api/*', (req, res) => {
         res.sendStatus(404)
     })
 
+    // Web Socket Routes
+    // ------------------------------------------------------------------------------------
+
+    // REMINDERS
+    // https://socket.io/docs/emit-cheatsheet/
+
+    setInterval(() => {
+        deps.logger.info('emitting boop')
+        io.emit('boop', { boop: 'yeah' })
+    }, 970)
+
+    io.on('connection', function(socket) {
+
+        deps.logger.info({
+            'socket.id': socket.id,
+        }, `A user connected via websockets`)
+
+        socket.on('disconnect', function(){
+            deps.logger.info({
+                'socket.id': socket.id,
+            }, `A user disconnected via websockets`)
+        })
+
+        socket.on('marco', () => {
+            deps.logger.info(`WS Event: marco`)
+            setTimeout(() => {
+                socket.emit('polo')
+            }, 200)
+        })
+
+    })
+
+    // Static and fallback Routes
     // ------------------------------------------------------------------------------------
 
     // Serve static files
-    server.use(express.static(path.join(process.cwd(), 'ui/build')))
+    app.use(express.static(path.join(process.cwd(), 'ui/build')))
 
     // Fallback for rewrite to index.html
-    server.get('*', (req, res) =>{
+    app.get('*', (req, res) =>{
         res.sendFile(path.join(process.cwd(), 'ui/build/index.html'))
     })
 

@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `jpx logs` command for tailing Jetpax server logs
 - Project internals
     - Added `pino` logger with pretty-print enabled for developing
+    - Added `socket.io` for WebSocket communication
 
 ## [0.3.0] - 2019-02-01
 ### Added
