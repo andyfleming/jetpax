@@ -66,6 +66,7 @@
   },
   "files": [
     "build/**/*",
+    "docs/**/*",
     "ui/build/**/*",
     "ui/public/**/*",
     "CHANGELOG.md",
