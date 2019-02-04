@@ -2,13 +2,14 @@ import * as React from 'react'
 import './NavBar.css'
 import {
     Button,
-    Classes,
+    Classes, IconName,
     Navbar,
     NavbarGroup,
     NavbarHeading
 } from "@blueprintjs/core"
 import {connect} from "react-redux"
 import {RootState} from "./App/Store/makeStore"
+import {Link} from "react-router-dom"
 
 type Props = {
     request: boolean
@@ -16,13 +17,22 @@ type Props = {
     event: boolean
 }
 
+function at(path: string) {
+    return (window.location.pathname === path)
+}
+
+const NavLink = ({path, icon, text}: {path: string, icon: IconName, text: string}) => (
+    <Link to={path}><Button className={`${Classes.MINIMAL} ${at(path) && 'selected'}`} icon={icon} text={text} /></Link>
+)
+
 const NavBar = ({request, reply, event}: Props) => {
     return (
         <Navbar className={Classes.DARK}>
             <NavbarGroup align="left">
                 <NavbarHeading className="logo"/>
-                <Button className={Classes.MINIMAL} icon="home" text="Home" />
-                <Button className={Classes.MINIMAL} icon="document" text="Files" />
+                <NavLink path="/dashboard" icon="home" text="Dashboard" />
+                <NavLink path="/services" icon="home" text="Services" />
+                <NavLink path="/assets" icon="document" text="Assets" />
             </NavbarGroup>
             <NavbarGroup align="right">
                 <Button className={`${Classes.MINIMAL} ${request && 'selected'}`} icon="cloud-upload" />

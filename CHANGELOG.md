@@ -9,9 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - UI Scaffolding
 - Implementing logging to file (`~/.jetpax/logs/server/server.log`) for Jetpax internals
 - `jpx logs` command for tailing Jetpax server logs
+- some simple docs (mostly as placeholders)
 - Project internals
-    - Added `pino` logger with pretty-print enabled for developing
-    - Added `socket.io` for WebSocket communication
+    - `pino` logger with pretty-print enabled for developing
+    - `socket.io` for WebSocket communication
+    - Routing with `react-router-dom`
+    - State management with `redux`
 
 ## [0.3.0] - 2019-02-01
 ### Added

@@ -17,6 +17,11 @@
     color: #F7C946;
 }
 
+#app .bp3-navbar a {
+    text-decoration: none;
+}
+
+
 #app .bp3-navbar .bp3-button.selected,
 #app .bp3-navbar .bp3-button.selected .bp3-icon {
     color: #ffffff;
