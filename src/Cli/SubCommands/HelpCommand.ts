@@ -1,21 +1,34 @@
 import Command from "./Command"
 import chalk from "chalk"
+import stripAnsi from 'strip-ansi'
+
+const WIDTH = 70
+
+const logOnBlack = (message: string = '') => {
+    const offset = message.length - stripAnsi(message).length
+    console.log(chalk.bgHex('#000000')(message.padEnd(WIDTH + offset)))
+}
 
 const HelpCommand: Command = {
     name: 'help',
     aliases: ['--help'],
     run: async () => {
         console.log()
-        console.log(`Available commands: `)
+        logOnBlack()
+        logOnBlack(chalk.bgHex('#000000')(`    ${chalk.hex('#FEC908')('J E ')}${chalk.hex('#F9A619')('T P ')}${chalk.hex('#F25822')('A X ')}`))
+        logOnBlack(chalk.hex('#FFFFFF')(`    C O M M A N D S`))
+        logOnBlack()
+        logOnBlack(`    ${chalk.hex('#FEC908')('up')}           ${chalk.hex('#F9A619')(`Starts the Jetpax server`)}`)
+        logOnBlack(`    ${chalk.hex('#FEC908')('down')}         ${chalk.hex('#F9A619')(`Stops the Jetpax server`)}`)
+        logOnBlack(`    ${chalk.hex('#FEC908')('logs')}         ${chalk.hex('#F9A619')(`Tails the Jetpax server logs`)}`)
+        logOnBlack()
+        logOnBlack(`    ${chalk.hex('#FEC908')('ui')}           ${chalk.hex('#F9A619')(`Opens the Jetpax dashboard`)}`)
+        logOnBlack(`    ${chalk.hex('#FEC908')('web')}          ${chalk.hex('#F9A619')(`Opens the Jetpax dashboard in a browser`)}`)
+        logOnBlack()
+        logOnBlack(`    ${chalk.hex('#FEC908')('help')}         ${chalk.hex('#F9A619')(`Displays a list of commands`)}`)
+        logOnBlack()
         console.log()
-        console.log(`  ${chalk.yellow('up')}           Starts the Jetpax server`)
-        console.log(`  ${chalk.yellow('down')}         Stops the Jetpax server`)
-        console.log(`  ${chalk.yellow('ui')}           Opens the Jetpax dashboard`)
-        console.log(`  ${chalk.yellow('web')}          Opens the Jetpax dashboard in a browser`)
-        console.log(`  ${chalk.yellow('logs')}         Tails the Jetpax server logs`)
-        console.log(`  ${chalk.yellow('help')}         Displays a list of commands`)
-        console.log()
-    }
+    },
 }
 
 export default HelpCommand
