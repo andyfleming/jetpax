@@ -10,7 +10,7 @@ async function runCli() {
     // If no argument is passed, it should run the default command
     if (!subCommand) {
         console.log()
-        console.log(` ${chalk.green('Jetpax')}`)
+        console.log(` ${chalk.hex('#FEC908')('J E ')}${chalk.hex('#F9A619')('T P ')}${chalk.hex('#F25822')('A X ')}`)
         console.log()
         console.log(` Run ${chalk.yellow('jpx help')} to see a list of available commands`)
         console.log()
