@@ -1,7 +1,8 @@
 import * as React from 'react'
-import {Hotkey, Hotkeys, HotkeysTarget, Menu, MenuItem} from "@blueprintjs/core"
+import {Menu, MenuItem} from "@blueprintjs/core"
 import {RouteComponentProps, withRouter} from "react-router"
 import { ItemPredicate, ItemRenderer, Omnibar } from "@blueprintjs/select"
+import {GlobalHotKeys} from "react-hotkeys"
 
 /*
  * This file is heavily influenced from blueprint example:
@@ -92,7 +93,6 @@ type State = {
     isOpen: boolean
 }
 
-@HotkeysTarget
 class JumpToMenu extends React.Component<Props, State> {
     state: State = {
         isOpen: false
@@ -102,20 +102,6 @@ class JumpToMenu extends React.Component<Props, State> {
         this.setState({
             isOpen: !this.state.isOpen
         })
-    }
-
-    public renderHotkeys() {
-        return (
-            <Hotkeys>
-                <Hotkey
-                    global={true}
-                    combo="mod + k"
-                    label={`Open "Jump To" Menu`}
-                    onKeyDown={this.handleToggle}
-                    preventDefault={true}
-                />
-            </Hotkeys>
-        )
     }
 
     private renderItemList = (props: any) => {
@@ -139,7 +125,7 @@ class JumpToMenu extends React.Component<Props, State> {
     render() {
         const { isOpen } = this.state
         return (
-            <>
+            <GlobalHotKeys handlers={{TOGGLE_JUMP_TO_MENU: this.handleToggle}}>
                 <JumpToOmnibar
                     itemPredicate={filterOption}
                     itemRenderer={renderOption}
@@ -150,7 +136,7 @@ class JumpToMenu extends React.Component<Props, State> {
                     onClose={this.handleClose}
                     resetOnSelect={true}
                 />
-            </>
+            </GlobalHotKeys>
         )
 
     }
