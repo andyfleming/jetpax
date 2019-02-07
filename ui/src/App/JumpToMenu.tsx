@@ -135,6 +135,9 @@ class JumpToMenu extends React.Component<Props, State> {
                     onItemSelect={this.handleItemSelect}
                     onClose={this.handleClose}
                     resetOnSelect={true}
+                    overlayProps={{
+                        transitionDuration: 0,
+                    }}
                 />
             </GlobalHotKeys>
         )
