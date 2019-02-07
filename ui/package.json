@@ -22,7 +22,8 @@
     "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "build:ci": "CI=true SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "test": "SKIP_PREFLIGHT_CHECK=true react-scripts test",
-    "test:ci": "CI=true SKIP_PREFLIGHT_CHECK=true react-scripts test"
+    "test:ci": "CI=true SKIP_PREFLIGHT_CHECK=true react-scripts test",
+    "coverage": "SKIP_PREFLIGHT_CHECK=true react-scripts test --coverage"
   },
   "eslintConfig": {
     "extends": "react-app"
