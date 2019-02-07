@@ -6,6 +6,7 @@ import StartServerCommand from "./StartServerCommand"
 import OpenWebUiCommand from "./OpenWebUiCommand"
 import StopServerCommand from "./StopServerCommand"
 import TailServerLogsCommand from "./TailServerLogsCommand"
+import ServerStatusCommand from "./ServerStatusCommand"
 
 const commands: Command[] = [
     GetVersionCommand,
@@ -13,6 +14,7 @@ const commands: Command[] = [
     OpenWebUiCommand,
     OpenUiCommand,
     StartServerCommand,
+    ServerStatusCommand,
     StopServerCommand,
     TailServerLogsCommand,
 ]

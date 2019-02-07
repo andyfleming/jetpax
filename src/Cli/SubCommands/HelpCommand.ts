@@ -20,6 +20,7 @@ const HelpCommand: Command = {
         logOnBlack()
         logOnBlack(`    ${chalk.hex('#FEC908')('up')}           ${chalk.hex('#F9A619')(`Starts the Jetpax server`)}`)
         logOnBlack(`    ${chalk.hex('#FEC908')('down')}         ${chalk.hex('#F9A619')(`Stops the Jetpax server`)}`)
+        logOnBlack(`    ${chalk.hex('#FEC908')('status')}       ${chalk.hex('#F9A619')(`Displays the status of the Jetpax server`)}`)
         logOnBlack(`    ${chalk.hex('#FEC908')('logs')}         ${chalk.hex('#F9A619')(`Tails the Jetpax server logs`)}`)
         logOnBlack()
         logOnBlack(`    ${chalk.hex('#FEC908')('ui')}           ${chalk.hex('#F9A619')(`Opens the Jetpax dashboard`)}`)
