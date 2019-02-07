@@ -6,6 +6,7 @@ import Dashboard from "../Dashboard/Dashboard"
 import Services from "../Services/Services"
 
 import './App.css'
+import JumpToMenu from "./JumpToMenu"
 
 class App extends Component {
     render() {
@@ -24,6 +25,7 @@ class App extends Component {
                         <Route component={PageNotFound}/>
                     </Switch>
                 </div>
+                <JumpToMenu />
             </div>
         )
     }

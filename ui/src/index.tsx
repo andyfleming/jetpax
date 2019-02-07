@@ -9,6 +9,7 @@ import * as serviceWorker from './serviceWorker'
 import 'normalize.css/normalize.css'
 import '@blueprintjs/icons/lib/css/blueprint-icons.css'
 import '@blueprintjs/core/lib/css/blueprint.css'
+import '@blueprintjs/select/lib/css/blueprint-select.css'
 import getDefaultDependencies from "./App/Dependencies/getDefaultDependencies"
 import makeStore from "./App/Store/makeStore"
 import registerSubscribers from "./App/Subscriptions/registerSubscribers"
