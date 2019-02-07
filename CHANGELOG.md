@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `jpx logs` command for tailing Jetpax server logs
 - some simple docs (mostly as placeholders)
 - "Jump To" menu to switch between views in the UI
-- Shortcut (<kbd>command<kbd>/<kbd>control</kbd> + <kbd>K</kbd>) to open "Jump To" menu
+- Shortcut (<kbd>command</kbd>/<kbd>control</kbd> + <kbd>K</kbd>) to open "Jump To" menu
 - Project internals
     - `pino` logger with pretty-print enabled for developing
     - `socket.io` for WebSocket communication
