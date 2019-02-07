@@ -41,7 +41,6 @@
     "@types/strip-ansi": "^3.0.0",
     "jest": "^24.0.0",
     "np": "^3.1.0",
-    "strip-ansi": "^5.0.0",
     "ts-jest": "^23.10.5",
     "ts-node-dev": "^1.0.0-pre.32",
     "typescript": "^3.2.4"
@@ -64,7 +63,8 @@
     "pm2": "^3.2.9",
     "prompt-confirm": "^2.0.4",
     "prompt-password": "^1.2.0",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.2.0",
+    "strip-ansi": "^5.0.0"
   },
   "files": [
     "build/**/*",
