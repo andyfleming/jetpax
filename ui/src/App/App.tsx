@@ -10,7 +10,6 @@ import JumpToMenu from "./JumpToMenu"
 
 class App extends Component {
     render() {
-        console.log('app props', this.props)
         return (
             <div id="app">
                 <NavBar/>
