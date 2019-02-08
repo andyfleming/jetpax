@@ -36,6 +36,6 @@ export default function registerSubscribers(store: Store<RootState, any>, {ws}: 
                     type: 'TX_MARCO_OVER',
                 })
             }, 300)
-        }, 790)
+        }, 2370)
     })
 }

@@ -62,7 +62,7 @@ const makeServer = async (deps: Dependencies) => {
     setInterval(() => {
         deps.logger.info('emitting boop')
         io.emit('boop', { boop: 'yeah' })
-    }, 970)
+    }, 2910)
 
     io.on('connection', function(socket) {
 
