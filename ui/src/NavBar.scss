@@ -14,19 +14,21 @@
         margin-right: 30px;
     }
 
-    .bp3-navbar .bp3-button,
-    .bp3-navbar .bp3-button .bp3-icon {
-        color: #F7C946;
-    }
+    .bp3-navbar {
+        a {
+            text-decoration: none;
+        }
 
-    .bp3-navbar a {
-        text-decoration: none;
-    }
+        .bp3-button,
+        .bp3-button .bp3-icon {
+            color: #F7C946;
+        }
 
+        .selected .bp3-button,
+        .selected .bp3-icon {
+            color: #ffffff;
 
-    .bp3-navbar .bp3-button.selected,
-    .bp3-navbar .bp3-button.selected .bp3-icon {
-        color: #ffffff;
+        }
     }
 
 }
