@@ -43,6 +43,9 @@ class Doc extends React.Component<any, Props> {
                         <ReactMarkdown
                             source={markdown}
                             escapeHtml={false}
+                            linkTarget={(url, text, title) => {
+                                return (url.startsWith('/')) ? '' : '_blank'
+                            }}
                         />
                     </article>
                 </div>
