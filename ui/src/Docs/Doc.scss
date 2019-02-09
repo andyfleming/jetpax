@@ -19,6 +19,10 @@
                 a {
                     display: block;
                     margin-bottom: 6px;
+
+                    &.at {
+                        color: #54272b;
+                    }
                 }
             }
         }

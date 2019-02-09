@@ -1,38 +1,38 @@
 import * as React from 'react'
-import {Link} from "react-router-dom"
+import {NavLink} from "react-router-dom"
 
 const DocsNav = () => (
     <>
         <section>
             <h3>General</h3>
-            <Link to="/docs/readme">Readme</Link>
-            <Link to="/docs/changelog">Changelog</Link>
-            <Link to="/docs/contributing">Contributing</Link>
+            <NavLink activeClassName="at" to="/docs/readme">Readme</NavLink>
+            <NavLink activeClassName="at" to="/docs/changelog">Changelog</NavLink>
+            <NavLink activeClassName="at" to="/docs/contributing">Contributing</NavLink>
         </section>
         <section>
             <h3>Command Line Interface</h3>
-            <Link to="/docs/cli/overview">Overview</Link>
-            {/*<Link to="/docs/cli/up"><code>jpx up</code></Link>*/}
+            <NavLink activeClassName="at" to="/docs/cli/overview">Overview</NavLink>
+            {/*<NavLink activeClassName="at" to="/docs/cli/up"><code>jpx up</code></NavLink>*/}
         </section>
         {/*<section>*/}
             {/*<h3>Guides</h3>*/}
-            {/*<Link to="/docs/guides/overview">Overview</Link>*/}
+            {/*<NavLink activeClassName="at" to="/docs/guides/overview">Overview</NavLink>*/}
         {/*</section>*/}
         <section>
             <h3>Configuration Objects</h3>
-            <Link to="/docs/configuration-objects/service">Service</Link>
+            <NavLink activeClassName="at" to="/docs/configuration-objects/service">Service</NavLink>
         </section>
         <section>
             <h3>Additional Concepts</h3>
-            <Link to="/docs/concepts/service-managers">Service Managers</Link>
+            <NavLink activeClassName="at" to="/docs/concepts/service-managers">Service Managers</NavLink>
         </section>
         <section>
             <h3>UI</h3>
-            <Link to="/docs/ui/keyboard-shortcuts">Keyboard Shortcuts</Link>
+            <NavLink activeClassName="at" to="/docs/ui/keyboard-shortcuts">Keyboard Shortcuts</NavLink>
         </section>
         <section>
             <h3>Internals</h3>
-            <Link to="/docs/internals/architecture">Architecture</Link>
+            <NavLink activeClassName="at" to="/docs/internals/architecture">Architecture</NavLink>
         </section>
 
     </>
