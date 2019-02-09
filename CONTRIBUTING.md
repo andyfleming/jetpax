@@ -15,7 +15,7 @@ npm start
 
 In the root of project, run
 
-```
+```bash
 ./bin/cli.sh help
 ```
 

@@ -1,0 +1,57 @@
+{
+  "sections": [
+    {
+      "title": "Overview",
+      "pages": [
+        {
+          "title": "README",
+          "path": "",
+          "source": "../README"
+        },
+        {
+          "title": "CHANGELOG",
+          "path": "../CHANGELOG"
+        }
+      ]
+    },
+    {
+      "title": "Guides",
+      "pages": []
+    },
+    {
+      "title": "Configuration Objects",
+      "pages": [
+        {
+          "title": "Service",
+          "path": "objects/services"
+        }
+      ]
+    },
+    {
+      "title": "Additional Concepts",
+      "pages": [
+        {
+          "title": "Service Managers",
+          "path": "concepts/service-managers"
+        }
+      ]
+    },
+    {
+      "title": "UI",
+      "pages": [
+        {
+          "title": "Keyboard Shortcuts",
+          "path": "ui/keyboard-shortcuts"
+        }
+      ]
+    },
+    {
+      "title": "CLI",
+      "pages": []
+    },
+    {
+      "title": "Internals",
+      "pages": []
+    }
+  ]
+}

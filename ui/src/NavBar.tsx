@@ -1,5 +1,5 @@
 import * as React from 'react'
-import './NavBar.css'
+import './NavBar.scss'
 import {
     Button,
     Classes, IconName,
@@ -31,10 +31,13 @@ const NavBar = ({request, reply, event}: Props) => {
             <NavbarGroup align="left">
                 <NavbarHeading className="logo"/>
                 <NavLink path="/dashboard" icon="home" text="Dashboard" />
-                <NavLink path="/services" icon="home" text="Services" />
-                <NavLink path="/assets" icon="document" text="Assets" />
+                <NavLink path="/services" icon="applications" text="Services" />
+                <NavLink path="/assets" icon="compressed" text="Assets" />
+                <NavLink path="/configuration" icon="code-block" text="Configuration" />
+                <NavLink path="/docs" icon="list-detail-view" text="Docs" />
             </NavbarGroup>
             <NavbarGroup align="right">
+                <NavLink path="/settings" icon="settings" text="Settings" />
                 <Button className={`${Classes.MINIMAL} ${request && 'selected'}`} icon="cloud-upload" />
                 <Button className={`${Classes.MINIMAL} ${reply && 'selected'}`} icon="cloud-download" />
                 <Button className={`${Classes.MINIMAL} ${event && 'selected'}`} icon="satellite" />

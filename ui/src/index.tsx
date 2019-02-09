@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import {Provider} from 'react-redux'
-import './index.css'
 import App from './App/App'
 import * as serviceWorker from './serviceWorker'
 
@@ -10,6 +9,10 @@ import 'normalize.css/normalize.css'
 import '@blueprintjs/icons/lib/css/blueprint-icons.css'
 import '@blueprintjs/core/lib/css/blueprint.css'
 import '@blueprintjs/select/lib/css/blueprint-select.css'
+import 'prismjs'
+import "./Docs/prism-custom.scss"
+import './index.scss'
+
 import getDefaultDependencies from "./App/Dependencies/getDefaultDependencies"
 import makeStore from "./App/Store/makeStore"
 import registerSubscribers from "./App/Subscriptions/registerSubscribers"

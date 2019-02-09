@@ -6,9 +6,20 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #5a363a;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+a {
+  //color: #ff7a00; // orange-ish
+   color: #d4863e;
+
+  &:hover {
+    color: #ff8a1f;
+    //color: #d49157;
+  }
 }

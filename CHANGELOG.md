@@ -7,8 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - `jpx status` commands to see Jetpax server status (online/offline)
+- Docs section
+
 ### Changed
 - "Jump To" menu animation transition removed (to be more responsive)
+- Project internals
+    - CSS -> SCSS
 
 ## [0.4.0] - 2019-02-06
 ### Added
