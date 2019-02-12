@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Added
 - "at" style for links in documentation navigation
+### Fixed
+- command aliases `--help` and `--version`
 
 ## [0.5.0] - 2019-02-09
 ### Added
