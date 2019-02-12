@@ -1,7 +1,7 @@
 import chalk from "chalk"
 import opn from 'opn'
-import Command from "./Command"
-import serverIsOnline from "../Telemetry/serverIsOnline"
+import Command from "../Command"
+import serverIsOnline from "../../Telemetry/serverIsOnline"
 
 const OpenWebUiCommand: Command = {
     name: 'web',

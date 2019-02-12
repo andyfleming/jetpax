@@ -1,7 +1,7 @@
-import Command from "./Command"
-import serverIsOnline from "../Telemetry/serverIsOnline"
+import Command from "../Command"
+import serverIsOnline from "../../Telemetry/serverIsOnline"
 import chalk from "chalk"
-import getServerPid from "../Telemetry/getServerPid"
+import getServerPid from "../../Telemetry/getServerPid"
 
 const StopServerCommand: Command = {
     name: 'down',

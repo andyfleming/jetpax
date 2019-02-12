@@ -1,7 +1,7 @@
 import * as path from "path"
-import Command from "./Command"
+import Command from "../Command"
 import {spawn} from "child_process"
-import serverLogFilePath from "../../Common/serverLogFilePath"
+import serverLogFilePath from "../../../Common/serverLogFilePath"
 
 const TailServerLogsCommand: Command = {
     name: 'logs',

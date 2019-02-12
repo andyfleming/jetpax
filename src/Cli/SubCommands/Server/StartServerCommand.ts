@@ -1,6 +1,6 @@
 import {spawn} from 'child_process'
-import Command from "./Command"
-import serverIsOnline from "../Telemetry/serverIsOnline"
+import Command from "../Command"
+import serverIsOnline from "../../Telemetry/serverIsOnline"
 import chalk from "chalk"
 import path from "path"
 

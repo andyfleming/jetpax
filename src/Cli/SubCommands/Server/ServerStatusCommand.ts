@@ -1,6 +1,6 @@
-import Command from "./Command"
+import Command from "../Command"
 import chalk from "chalk"
-import serverIsOnline from "../Telemetry/serverIsOnline"
+import serverIsOnline from "../../Telemetry/serverIsOnline"
 
 const ServerStatusCommand: Command = {
     name: 'status',
