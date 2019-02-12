@@ -3,6 +3,7 @@
 import chalk from 'chalk'
 import splitArgs from "./ArgumentParsing/splitArgs"
 import getCommand from "./SubCommands/getCommand"
+import serverIsOnline from "./Telemetry/serverIsOnline"
 
 async function runCli() {
     const [subCommand, ...args] = process.argv.slice(2)
@@ -21,15 +22,29 @@ async function runCli() {
 
     if (command === null || command === undefined) {
         console.log()
-        console.log(chalk.red(`Command "${subCommand}" not found.`))
+        console.log(chalk.red(` Command "${subCommand}" not found.`))
         console.log()
-        console.log(`Run ${chalk.yellow('jpx help')} to see a list of available commands.`)
+        console.log(` Run ${chalk.yellow('jpx help')} to see a list of available commands.`)
         console.log()
+
+        process.exit(127)
         return
+    }
+
+    if (command.requiresServer) {
+        if (!await serverIsOnline()) {
+            console.log()
+            console.log(chalk.red(' This command requires the server to be running.'))
+            console.log()
+            console.log(` Run ${chalk.yellow('jpx up')} to start the server.`)
+            console.log()
+
+            process.exit(1)
+            return
+        }
     }
 
     await command.run(splitArgs(args))
 }
-
 
 runCli()

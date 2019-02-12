@@ -18,6 +18,8 @@ const OpenUiCommand: Command = {
             console.log()
             console.log(` Run ${chalk.yellow('jpx up')} to start the server.`)
             console.log()
+
+            process.exit(1)
             return
         }
 
