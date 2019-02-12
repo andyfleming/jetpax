@@ -1,7 +1,8 @@
 import axios from "axios"
+import serverUrl from "../../Common/serverUrl"
 
 export default async function getServerPid(): Promise<number> {
-    const response = await axios.get("http://localhost:8777/api/pid", {
+    const response = await axios.get(`${serverUrl}/api/pid`, {
         timeout: 500,
     })
 

@@ -1,10 +1,9 @@
-import axios from 'axios'
-const daemonizeProcess = require('daemonize-process')
 import Command from "../Command"
 import fs from "fs"
 import path from "path"
 import chalk from "chalk"
 import serverIsOnline from "../../Telemetry/serverIsOnline"
+import serverUrl from "../../../Common/serverUrl"
 const carlo = require('carlo')
 
 const OpenUiCommand: Command = {
@@ -41,7 +40,7 @@ const OpenUiCommand: Command = {
         app.on('exit', () => process.exit())
 
         // Navigate to the Jetpax App/API server
-        await app.load('http://localhost:8777')
+        await app.load(serverUrl)
 
         console.log(`${chalk.green(' Dashboard app opened successfully.')} `)
         console.log(' Close the app window or end this process to close.')

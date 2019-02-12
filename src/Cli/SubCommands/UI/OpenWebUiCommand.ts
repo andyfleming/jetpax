@@ -2,6 +2,7 @@ import chalk from "chalk"
 import opn from 'opn'
 import Command from "../Command"
 import serverIsOnline from "../../Telemetry/serverIsOnline"
+import serverUrl from "../../../Common/serverUrl"
 
 const OpenWebUiCommand: Command = {
     name: 'web',
@@ -23,7 +24,7 @@ const OpenWebUiCommand: Command = {
         console.log(chalk.yellow(' Opening Jetpax UI in browser...'))
         console.log()
 
-        await opn('http://localhost:8777')
+        await opn(serverUrl)
 
         console.log(`${chalk.green(' Dashboard site opened successfully.')} `)
         console.log()

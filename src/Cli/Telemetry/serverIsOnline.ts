@@ -1,8 +1,9 @@
 import axios from "axios"
+import serverUrl from "../../Common/serverUrl"
 
 export default async function serverIsOnline() {
     try {
-        const response = await axios.get("http://localhost:8777/api/online", {
+        const response = await axios.get(`${serverUrl}/api/online`, {
             timeout: 500,
         })
 
