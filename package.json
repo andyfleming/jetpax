@@ -50,7 +50,6 @@
     "bluebird": "^3.5.3",
     "carlo": "^0.9.43",
     "chalk": "^2.4.2",
-    "cli-table2": "^0.2.0",
     "daemonize-process": "^2.0.1",
     "execa": "^1.0.0",
     "express": "^4.16.4",
