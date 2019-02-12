@@ -1,6 +1,8 @@
 import Command from "./Command"
 import path from 'path'
 import {readFileSync} from "fs"
+import chalk from "chalk"
+import logOnBlack from "../Output/logOnBlack"
 
 const GetVersionCommand: Command = {
     name: 'version',
@@ -11,7 +13,12 @@ const GetVersionCommand: Command = {
         })
         const parsed = JSON.parse(packageFile)
 
-        console.log(`Jetpax Version: ${parsed.version}`)
+        console.log()
+        logOnBlack()
+        logOnBlack(`    ${chalk.hex('#FEC908')('J E ')}${chalk.hex('#F9A619')('T P ')}${chalk.hex('#F25822')('A X')}`)
+        logOnBlack(chalk.hex('#FFFFFF')(`    ${parsed.version}`))
+        logOnBlack()
+        console.log()
     }
 }
 
