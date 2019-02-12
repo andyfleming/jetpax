@@ -19,6 +19,15 @@ In the root of project, run
 ./bin/cli.sh help
 ```
 
+Or, to run anywhere, start watch-building and link the project
+
+```bash
+npm link .
+npm run watch
+# cd anywhere-else
+jpx version
+```
+
 ## Developing the UI
 
 In the `ui` directory, run
