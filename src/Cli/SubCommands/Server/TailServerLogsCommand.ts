@@ -9,7 +9,7 @@ const TailServerLogsCommand: Command = {
         const command = `tail -f -n 50 ${serverLogFilePath} | ./node_modules/.bin/pino-pretty`
         const projectRootPath = path.join(__dirname, '../../../')
 
-        const child = spawn('sh', ['-c', command], {
+        spawn('sh', ['-c', command], {
             cwd: projectRootPath,
             stdio: 'inherit',
         })
