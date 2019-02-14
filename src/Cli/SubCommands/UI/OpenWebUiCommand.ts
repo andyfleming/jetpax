@@ -1,14 +1,14 @@
 import chalk from "chalk"
 import opn from 'opn'
 import Command from "../Command"
-import serverIsOnline from "../../Telemetry/serverIsOnline"
 import serverUrl from "../../../Common/serverUrl"
+import api from "../../API/api"
 
 const OpenWebUiCommand: Command = {
     name: 'web',
     run: async () => {
         // Make sure the server is running before we start the UI
-        if (!await serverIsOnline()) {
+        if (!await api.serverIsOnline()) {
             console.log()
             console.log(chalk.red(' Server offline!'))
             console.log(' Not starting UI.')

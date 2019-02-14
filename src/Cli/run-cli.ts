@@ -3,7 +3,8 @@
 import chalk from 'chalk'
 import splitArgs from "./ArgumentParsing/splitArgs"
 import getCommand from "./SubCommands/getCommand"
-import serverIsOnline from "./Telemetry/serverIsOnline"
+import ServerApiHttp from "./API/ServerApiHttp"
+import api from "./API/api"
 
 async function runCli() {
     const [subCommand, ...args] = process.argv.slice(2)
@@ -32,7 +33,7 @@ async function runCli() {
     }
 
     if (command.requiresServer) {
-        if (!await serverIsOnline()) {
+        if (!await api.serverIsOnline()) {
             console.log()
             console.log(chalk.red(' This command requires the server to be running.'))
             console.log()

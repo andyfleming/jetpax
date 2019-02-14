@@ -1,25 +1,17 @@
-const Enquirer = require('enquirer')
-import * as crypto from 'crypto'
+import {prompt} from 'enquirer'
+import crypto from 'crypto'
 
 async function getInput(question: string, defaultAnswer?: string) {
-    const enquirer = new Enquirer()
     const questionName = crypto.createHash('md5').update(question).digest("hex")
-    const opts: {[key: string]: any} = {
+
+    const responses = await prompt({
+        type: 'input',
         name: questionName,
         message: question,
-    }
+        initial: (typeof defaultAnswer === 'string') ? defaultAnswer : undefined,
+    }) as any
 
-    if (typeof defaultAnswer === typeof '') {
-        opts['default'] = defaultAnswer
-    }
-
-    enquirer.question(opts)
-
-    // Ask the question
-    const response = await enquirer.ask(questionName)
-
-    // Return the answer
-    return response[questionName]
+    return responses[questionName]
 }
 
 export default getInput

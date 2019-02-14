@@ -1,11 +1,11 @@
 import Command from "../Command"
 import chalk from "chalk"
-import serverIsOnline from "../../Telemetry/serverIsOnline"
+import api from "../../API/api"
 
 const ServerStatusCommand: Command = {
     name: 'status',
     run: async () => {
-        const status = (await serverIsOnline()) ? chalk.green('ONLINE') : chalk.red('OFFLINE')
+        const status = (await api.serverIsOnline()) ? chalk.green('ONLINE') : chalk.red('OFFLINE')
 
         console.log()
         console.log(` Jetpax server status: ${status}`)

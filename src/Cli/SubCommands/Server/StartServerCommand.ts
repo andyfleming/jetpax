@@ -1,15 +1,15 @@
 import {spawn} from 'child_process'
 import Command from "../Command"
-import serverIsOnline from "../../Telemetry/serverIsOnline"
 import chalk from "chalk"
 import path from "path"
+import api from "../../API/api"
 
 const StartServerCommand: Command = {
     name: 'up',
     run: async () => {
 
         // Check that the server isn't already running
-        if (await serverIsOnline()) {
+        if (await api.serverIsOnline()) {
             console.log()
             console.log(chalk.yellow(' Server is already online.'))
             console.log()

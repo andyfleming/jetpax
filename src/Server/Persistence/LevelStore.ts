@@ -19,7 +19,7 @@ export default class LevelStore implements KeyValueStore {
 
     async get(key: string): Promise<any|undefined> {
         try {
-            return await this.db.get(key)
+            return await this.db.get(key).value
         } catch (err) {
             return undefined
         }
@@ -35,7 +35,7 @@ export default class LevelStore implements KeyValueStore {
 
             this.db.createReadStream({gt, lt})
                 .on('data', function(data: any) {
-                    items.push(data)
+                    items.push(JSON.parse(data.value))
                 })
                 .on('error', (err: any) => {
                     reject(err)
@@ -47,7 +47,7 @@ export default class LevelStore implements KeyValueStore {
     }
 
     async set(key: string, value: any): Promise<void> {
-        await this.db.put(key, value)
+        await this.db.put(key, value, { valueEncoding: 'json' })
     }
 
     async delete(key: string): Promise<void> {

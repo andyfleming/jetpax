@@ -1,14 +1,13 @@
 import Command from "../Command"
-import serverIsOnline from "../../Telemetry/serverIsOnline"
 import chalk from "chalk"
-import getServerPid from "../../Telemetry/getServerPid"
+import api from "../../API/api"
 
 const StopServerCommand: Command = {
     name: 'down',
     run: async () => {
 
         // Check that the server isn't already running
-        if (!await serverIsOnline()) {
+        if (!await api.serverIsOnline()) {
             console.log()
             console.log(chalk.yellow(' Server is already offline.'))
             console.log()
@@ -16,7 +15,7 @@ const StopServerCommand: Command = {
         }
 
         try {
-            const pid = await getServerPid()
+            const pid = await api.getServerPid()
 
             process.kill(pid)
 

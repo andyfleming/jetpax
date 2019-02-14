@@ -2,15 +2,15 @@ import Command from "../Command"
 import fs from "fs"
 import path from "path"
 import chalk from "chalk"
-import serverIsOnline from "../../Telemetry/serverIsOnline"
 import serverUrl from "../../../Common/serverUrl"
+import api from "../../API/api"
 const carlo = require('carlo')
 
 const OpenUiCommand: Command = {
     name: 'ui',
     run: async () => {
         // Make sure the server is running before we start the UI
-        if (!await serverIsOnline()) {
+        if (!await api.serverIsOnline()) {
             console.log()
             console.log(chalk.red(' Server offline!'))
             console.log(' Not starting UI.')

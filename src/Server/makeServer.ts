@@ -1,45 +1,27 @@
 import express from 'express'
+import bodyParser from 'body-parser'
 import path from 'path'
 import {Server} from 'http'
 import socketIo from 'socket.io'
 import Dependencies from "./Dependencies/Dependencies"
+import requestLoggerMiddleware from "./Logging/requestLoggerMiddleware"
+import WebSocketEventHandler from "./EventHandlers/WebSocketEventHandler"
+import MarcoHandler from "./EventHandlers/MarcoHandler"
+import Workspace from "./Persistence/Entities/Workspace"
 
 const makeServer = async (deps: Dependencies) => {
     const app = express()
     const server = new Server(app)
     const io = socketIo(server)
 
+    app.use(bodyParser.json())
+    // app.use(bodyParser.urlencoded({ extended: false }))
+
     // HTTP API Routes
     // ------------------------------------------------------------------------------------
 
     // Log API calls
-    app.use('/api/*', (req, res, next) => {
-
-        const onResFinished = function() {
-            // @ts-ignore
-            this.removeListener('finish', onResFinished)
-            // @ts-ignore
-            if (res.statusCode > 500) {
-                deps.logger.error(`Response: ${res.statusCode} ${req.method}: ${req.url}`)
-            } else if (res.statusCode >= 400) {
-                deps.logger.warn(`Response: ${res.statusCode} ${req.method}: ${req.url}`)
-            } else {
-                deps.logger.info(`Response: ${res.statusCode} ${req.method}: ${req.url}`)
-            }
-        }
-
-        const onResError = function() {
-            // @ts-ignore
-            this.removeListener('error', onResError)
-            // @ts-ignore
-            deps.logger.warn(`Response Error: ${req.method}: ${req.url}`)
-        }
-
-        deps.logger.info(`Request: ${req.method}: ${req.originalUrl}`)
-        res.on('finish', onResFinished)
-        res.on('error', onResError)
-        next()
-    })
+    app.use('/api/*', requestLoggerMiddleware(deps.logger))
 
     app.get('/api/online', (req, res) => {
         res.send('Jetpax Server API Online')
@@ -47,6 +29,37 @@ const makeServer = async (deps: Dependencies) => {
 
     app.get('/api/pid', (req, res) => {
         res.send(`${process.pid}`)
+    })
+
+    app.get('/api/workspaces', async (req, res) => {
+        const workspaces = await deps.collection('workspaces').getAll()
+
+        res.json({
+            data: workspaces,
+        })
+    })
+
+    app.post('/api/workspaces', async (req, res) => {
+
+        const existingWorkspaces = await deps.collection('workspaces').getAll()
+        const workspaceAlreadyRegistered = (existingWorkspaces.filter(workspace => workspace.path === req.body.path).length > 0)
+
+        if (workspaceAlreadyRegistered) {
+            res.status(409)
+            res.json({
+                message: 'Workspace already registered'
+            })
+            return
+        }
+
+        await deps.collection('workspaces').insert({
+            name: req.body.name,
+            path: req.body.path,
+        })
+
+        res.json({
+            message: 'Workspace successfully registered.',
+        })
     })
 
     app.all('/api/*', (req, res) => {
@@ -59,29 +72,46 @@ const makeServer = async (deps: Dependencies) => {
     // REMINDERS
     // https://socket.io/docs/emit-cheatsheet/
 
+    const emitToAll = (eventName: string, data: any) => {
+        deps.logger.info(`WS to all: "${eventName}"`)
+        io.emit(eventName, data)
+    }
+
+    function socketOn(socket: socketIo.Socket, eventName: string, handler: WebSocketEventHandler) {
+        socket.on(eventName, (data: any) => {
+            deps.logger.info(`WS from user: "${eventName}"`)
+            handler.handle(data, {
+                emitToAll,
+                emitToOthers: (eventName: string, data: any) => {
+                    deps.logger.info(`WS to others: "${eventName}"`)
+                    socket.broadcast.emit(eventName, data)
+                },
+                emitBack: (eventName: string, data: any) => {
+                    deps.logger.info(`WS to user: "${eventName}"`)
+                    socket.emit(eventName, data)
+                },
+            })
+        })
+    }
+
     setInterval(() => {
-        deps.logger.info('emitting boop')
-        io.emit('boop', { boop: 'yeah' })
-    }, 2910)
+        emitToAll('boop', { boop: 'yeah' })
+    }, 3710)
+
 
     io.on('connection', function(socket) {
 
-        deps.logger.info({
-            'socket.id': socket.id,
+        deps.logger.debug({
+            'socketId': socket.id,
         }, `A user connected via websockets`)
 
         socket.on('disconnect', function(){
-            deps.logger.info({
-                'socket.id': socket.id,
+            deps.logger.debug({
+                'socketId': socket.id,
             }, `A user disconnected via websockets`)
         })
 
-        socket.on('marco', () => {
-            deps.logger.info(`WS Event: marco`)
-            setTimeout(() => {
-                socket.emit('polo')
-            }, 200)
-        })
+        socketOn(socket, 'marco', new MarcoHandler(deps))
 
     })
 

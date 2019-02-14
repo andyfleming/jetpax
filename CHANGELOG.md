@@ -7,8 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Added
 - "at" style for links in documentation navigation
+- initial implementation of `jpx init` command
+- Project internals
+    - Added debug timer to track server startup time
+    - WebSocket route helpers
 ### Changed
 - style of version command output
+- Project internals
+    - collection (document-db-style) abstraction for data storage
+    - organization of server API calls into class (for CLI)
+    - default logging level to debug when developing
 ### Fixed
 - command aliases `--help` and `--version`
 

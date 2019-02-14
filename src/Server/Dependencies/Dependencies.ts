@@ -1,7 +1,7 @@
 import {Logger} from "pino"
-import KeyValueStore from "../Persistence/KeyValueStore"
+import {CollectionFactory} from "../Persistence/collection"
 
 export default interface Dependencies {
     logger: Logger
-    kv: KeyValueStore
+    collection: CollectionFactory
 }

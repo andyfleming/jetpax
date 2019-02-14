@@ -29,5 +29,6 @@ export async function makeLogger(): Promise<Logger> {
     // Otherwise, we'll print to stdout with the pretty print option/module
     return pino({
         prettyPrint: true,
+        level: 'debug',
     })
 }
