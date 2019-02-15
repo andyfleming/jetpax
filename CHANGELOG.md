@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - "at" style for links in documentation navigation
 - initial implementation of `jpx init` command
+- `jpx register` command
 - Project internals
     - Added debug timer to track server startup time
     - WebSocket route helpers

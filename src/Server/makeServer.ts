@@ -7,7 +7,6 @@ import Dependencies from "./Dependencies/Dependencies"
 import requestLoggerMiddleware from "./Logging/requestLoggerMiddleware"
 import WebSocketEventHandler from "./EventHandlers/WebSocketEventHandler"
 import MarcoHandler from "./EventHandlers/MarcoHandler"
-import Workspace from "./Persistence/Entities/Workspace"
 
 const makeServer = async (deps: Dependencies) => {
     const app = express()
