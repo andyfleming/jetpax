@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Project internals
     - Added debug timer to track server startup time
     - WebSocket route helpers
+    - Changed typescript compilation target to es2017 (for CLI, Server)
 ### Changed
 - style of version command output
 - Project internals
