@@ -26,7 +26,7 @@ const OpenUiCommand: Command = {
         console.log(chalk.yellow(' Opening Jetpax UI...'))
         console.log()
 
-        const icon = fs.readFileSync(path.join(__dirname, '../../../ui/public/jetpax-app-icon.png'))
+        const icon = fs.readFileSync(path.join(__dirname, '../../../../ui/public/jetpax-app-icon.png'))
         const options = {
             channel: 'r626762', // ( Version 71.0.3578.98 looked up on http://omahaproxy.appspot.com/ )
             icon,
