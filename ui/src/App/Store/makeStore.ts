@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore, Store } from 'redux'
+import {AnyAction, applyMiddleware, combineReducers, createStore, Store} from 'redux'
 import thunk, { ThunkMiddleware } from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import Dependencies from '../Dependencies/Dependencies'
@@ -56,14 +56,12 @@ export type RootState = {
     webSocketActivity: WebSocketActivityState
 }
 
-export type ActionResults = any
-
-export default function makeStore(deps: Dependencies, initialState?: object): Store<RootState, ActionResults> {
+export default function makeStore(deps: Dependencies, initialState?: object): Store<RootState, AnyAction> {
     const rootReducer = combineReducers({
         webSocketActivity,
     })
     const middleware = composeWithDevTools(applyMiddleware(
-        thunk.withExtraArgument(deps) as ThunkMiddleware<RootState, ActionResults, Dependencies>,
+        thunk.withExtraArgument(deps) as ThunkMiddleware<RootState, AnyAction, Dependencies>,
     ))
 
     return createStore(rootReducer, initialState!, middleware)
