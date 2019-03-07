@@ -27,7 +27,10 @@ const options: JumpToOption[] = [
         title: 'Assets',
         path: '/assets',
     },
-
+    {
+        title: 'Docs',
+        path: '/docs',
+    },
 ]
 
 function escapeRegExpChars(text: string) {
