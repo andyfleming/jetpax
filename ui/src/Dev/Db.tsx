@@ -15,6 +15,7 @@ interface State {
     entryLoading: boolean
     keys: string []
     entryData: string
+    selectedKey: string
 }
 
 export class Db extends React.Component<Props, State> {
@@ -23,6 +24,7 @@ export class Db extends React.Component<Props, State> {
         entryLoading: false,
         keys: [],
         entryData: '',
+        selectedKey: '',
     }
 
     componentDidMount(): void {
@@ -62,6 +64,9 @@ export class Db extends React.Component<Props, State> {
 
     handleClickEntry(key: string) {
         return () => {
+            this.setState({
+                selectedKey: key
+            })
             this.loadEntry(key)
         }
     }
@@ -72,6 +77,7 @@ export class Db extends React.Component<Props, State> {
             entryLoading,
             keys,
             entryData,
+            selectedKey,
         } = this.state
 
         return (
@@ -92,7 +98,7 @@ export class Db extends React.Component<Props, State> {
                         <tbody>
                         {keysLoading && <CenteredSpinner />}
                         {!keysLoading && keys.map(key => (
-                            <tr key={key} onClick={this.handleClickEntry(key)}>
+                            <tr key={key} onClick={this.handleClickEntry(key)} className={key === selectedKey ? 'selected': ''}>
                                 <td>{key}</td>
                             </tr>
                         ))}
@@ -109,4 +115,3 @@ export class Db extends React.Component<Props, State> {
 }
 
 export default withDeps(Db)
-

@@ -9,6 +9,13 @@
 
   .key-list {
     float: left;
+
+    table {
+      tr.selected td {
+        background: #137CBC;
+        color: white;
+      }
+    }
   }
   .entry-value {
     border-left: none;
