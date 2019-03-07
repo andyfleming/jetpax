@@ -5,8 +5,12 @@ import collection from "../Persistence/collection"
 
 
 export default async function getDependencies(): Promise<Dependencies> {
+    const logger = await makeLogger()
+    const kv = await makeLevelStore(logger)
+
     return {
-        logger: await makeLogger(),
-        collection: collection(await makeLevelStore()),
+        kv,
+        logger,
+        collection: collection(kv),
     }
 }

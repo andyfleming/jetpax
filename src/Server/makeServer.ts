@@ -3,6 +3,7 @@ import bodyParser from 'body-parser'
 import path from 'path'
 import {Server} from 'http'
 import socketIo from 'socket.io'
+import cors from 'cors'
 import Dependencies from "./Dependencies/Dependencies"
 import requestLoggerMiddleware from "./Logging/requestLoggerMiddleware"
 import WebSocketEventHandler from "./EventHandlers/WebSocketEventHandler"
@@ -13,8 +14,11 @@ const makeServer = async (deps: Dependencies) => {
     const server = new Server(app)
     const io = socketIo(server)
 
+    app.use(cors())
+    app.options('*', cors())
+
     app.use(bodyParser.json())
-    // app.use(bodyParser.urlencoded({ extended: false }))
+    app.use(bodyParser.urlencoded({ extended: false }))
 
     // HTTP API Routes
     // ------------------------------------------------------------------------------------
@@ -35,6 +39,23 @@ const makeServer = async (deps: Dependencies) => {
 
         res.json({
             data: workspaces,
+        })
+    })
+
+    app.get('/api/db/keys', async (req, res) => {
+        res.json({
+            data: await deps.kv.getAllKeys()
+        })
+    })
+
+    app.get('/api/db/entry', async (req, res) => {
+        console.log('req.query.key', req.query.key)
+        const data = await deps.kv.get(req.query.key)
+
+        console.log('data', data)
+
+        res.json({
+            data,
         })
     })
 

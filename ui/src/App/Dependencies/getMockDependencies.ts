@@ -1,4 +1,5 @@
 import Dependencies from "./Dependencies"
+import ApiClient from './ApiClient'
 
 export default function getMockDependencies(): Dependencies {
     return {
@@ -6,6 +7,8 @@ export default function getMockDependencies(): Dependencies {
             on: () => {},
             emit: () => {},
         } as any,
-        getDbKeys: () => Promise.resolve([]),
+        api: {
+
+        } as ApiClient
     }
 }

@@ -36,13 +36,12 @@ export class Db extends React.Component<Props, State> {
             keysLoading: true,
         })
 
-        // get keys
-        setTimeout(async () => {
-            this.setState({
-                keysLoading: false,
-                keys: await this.props.deps.getDbKeys()
-            })
-        }, 200)
+        const keys = await this.props.deps.api.getDbKeys()
+
+        this.setState({
+            keysLoading: false,
+            keys,
+        })
     }
 
     async loadEntry(key: string) {
@@ -50,12 +49,12 @@ export class Db extends React.Component<Props, State> {
             entryLoading: true,
         })
 
-        setTimeout(() => {
-            this.setState({
-                entryLoading: false,
-                entryData: 'wow',
-            })
-        }, 200)
+        const data = await this.props.deps.api.getDbEntry(key)
+
+        this.setState({
+            entryLoading: false,
+            entryData: JSON.stringify(data, null, 2),
+        })
     }
 
     handleRefreshButtonClicked = () => {
@@ -107,7 +106,7 @@ export class Db extends React.Component<Props, State> {
                 </div>
                 <div className="entry-value">
                     {entryLoading && <CenteredSpinner />}
-                    {!entryLoading && entryData}
+                    {!entryLoading && <pre className="entry-value-data"><code>{entryData}</code></pre>}
                 </div>
             </ViewContainer>
         )

@@ -30,4 +30,8 @@ export default class InMemoryStore implements KeyValueStore {
 
         return results
     }
+
+    async getAllKeys(): Promise<string[]> {
+        return Array.from(this.db.entries()).map(([key, value]) => key)
+    }
 }

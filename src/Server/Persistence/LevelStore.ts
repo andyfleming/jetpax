@@ -1,12 +1,16 @@
 import KeyValueStore from "./KeyValueStore"
 import jetpaxHome from "../../Common/jetpaxHome"
 import {registerShutdownTask} from "../Shutdown/runShutdownTasks"
+import { Logger } from 'pino'
 const level = require('level')
 
 export default class LevelStore implements KeyValueStore {
     private db: any
 
-    constructor(private readonly location = `${jetpaxHome}/kv-db`) {}
+    constructor(
+        private readonly logger: Logger,
+        private readonly location = `${jetpaxHome}/kv-db`,
+    ) {}
 
     async connect() {
         this.db = await level(this.location)
@@ -18,9 +22,11 @@ export default class LevelStore implements KeyValueStore {
     }
 
     async get(key: string): Promise<any|undefined> {
+        this.logger.debug(`level get called`)
         try {
-            return await this.db.get(key).value
+            return await this.db.get(key, {valueEncoding: 'json'})
         } catch (err) {
+            this.logger.warn(`Key-value DB key not found: ${key}`)
             return undefined
         }
     }
@@ -46,6 +52,23 @@ export default class LevelStore implements KeyValueStore {
         })
     }
 
+    getAllKeys(): Promise<string[]> {
+        return new Promise((resolve, reject) => {
+            const keys: string[] = []
+
+            this.db.createKeyStream()
+                .on('data', function(key: string) {
+                    keys.push(key)
+                })
+                .on('error', (err: any) => {
+                    reject(err)
+                })
+                .on('end', () => {
+                    resolve(keys)
+                })
+        })
+    }
+
     async set(key: string, value: any): Promise<void> {
         await this.db.put(key, value, { valueEncoding: 'json' })
     }
@@ -56,8 +79,8 @@ export default class LevelStore implements KeyValueStore {
 
 }
 
-export async function makeLevelStore(location?: string) {
-    const store = new LevelStore(location)
+export async function makeLevelStore(logger: Logger, location?: string) {
+    const store = new LevelStore(logger, location)
 
     await store.connect()
 

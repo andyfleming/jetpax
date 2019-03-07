@@ -20,5 +20,13 @@
   .entry-value {
     border-left: none;
     float: right;
+
+    .entry-value-data {
+      display: flex;
+      height: 100%;
+      background: #f0f0f0;
+      margin: 0;
+      padding: 10px;
+    }
   }
 }

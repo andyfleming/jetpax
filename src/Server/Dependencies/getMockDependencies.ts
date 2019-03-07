@@ -4,8 +4,11 @@ import InMemoryStore from "../Persistence/InMemoryStore"
 import collection from "../Persistence/collection"
 
 export default async function getMockDependencies(): Promise<Dependencies> {
+    const kv = new InMemoryStore()
+
     return {
+        kv,
         logger: pino(),
-        collection: collection(new InMemoryStore()),
+        collection: collection(kv),
     }
 }
