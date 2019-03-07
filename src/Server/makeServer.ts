@@ -4,6 +4,7 @@ import path from 'path'
 import {Server} from 'http'
 import socketIo from 'socket.io'
 import cors from 'cors'
+import _ from 'lodash'
 import Dependencies from "./Dependencies/Dependencies"
 import requestLoggerMiddleware from "./Logging/requestLoggerMiddleware"
 import WebSocketEventHandler from "./EventHandlers/WebSocketEventHandler"
@@ -49,10 +50,7 @@ const makeServer = async (deps: Dependencies) => {
     })
 
     app.get('/api/db/entry', async (req, res) => {
-        console.log('req.query.key', req.query.key)
         const data = await deps.kv.get(req.query.key)
-
-        console.log('data', data)
 
         res.json({
             data,
@@ -61,20 +59,48 @@ const makeServer = async (deps: Dependencies) => {
 
     app.post('/api/workspaces', async (req, res) => {
 
+        const path = _.trimEnd(req.body.path, '/')
+        const name = req.body.name
         const existingWorkspaces = await deps.collection('workspaces').getAll()
-        const workspaceAlreadyRegistered = (existingWorkspaces.filter(workspace => workspace.path === req.body.path).length > 0)
+        const workspaceAlreadyRegistered = (existingWorkspaces.filter(workspace => workspace.path === path).length > 0)
 
         if (workspaceAlreadyRegistered) {
             res.status(409)
             res.json({
-                message: 'Workspace already registered'
+                message: 'Workspace already registered',
+            })
+            return
+        }
+
+        if (!path) {
+            res.status(400)
+            res.json({
+                message: 'Workspace path cannot be blank',
+            })
+            return
+        }
+
+        if (!_.startsWith(path, '/')) {
+            res.status(400)
+            res.json({
+                message: 'Workspace path must be an absolute path starting with "/"',
+            })
+            return
+        }
+
+        // TODO: consider validating that the workspace directory exists
+
+        if (!name) {
+            res.status(400)
+            res.json({
+                message: 'Workspace name cannot be blank',
             })
             return
         }
 
         await deps.collection('workspaces').insert({
-            name: req.body.name,
-            path: req.body.path,
+            name,
+            path,
         })
 
         res.json({
