@@ -5,6 +5,7 @@ export default function getMockDependencies(): Dependencies {
         ws: {
             on: () => {},
             emit: () => {},
-        } as any
+        } as any,
+        getDbKeys: () => Promise.resolve([]),
     }
 }

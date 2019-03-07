@@ -1,0 +1,17 @@
+#db-gui {
+  .key-list,
+  .entry-value {
+    height: 85vh;
+    width: 50%;
+    border: solid 1px #ddd;
+    overflow: auto;
+  }
+
+  .key-list {
+    float: left;
+  }
+  .entry-value {
+    border-left: none;
+    float: right;
+  }
+}

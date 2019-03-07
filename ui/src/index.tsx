@@ -16,6 +16,7 @@ import './index.scss'
 import getDefaultDependencies from "./App/Dependencies/getDefaultDependencies"
 import makeStore from "./App/Store/makeStore"
 import registerSubscribers from "./App/Subscriptions/registerSubscribers"
+import { DependencyProvider } from './App/Dependencies/DependencyContext'
 
 // import openSocket from 'socket.io-client'
 // const socket = openSocket('http://localhost:8777')
@@ -31,11 +32,15 @@ const store = makeStore(deps)
 registerSubscribers(store, deps)
 
 ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </Provider>, document.getElementById('root'))
+    <DependencyProvider value={deps}>
+        <Provider store={store}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </Provider>
+    </DependencyProvider>,
+    document.getElementById('root')
+)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
