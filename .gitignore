@@ -83,3 +83,6 @@ typings/
 
 # IDE Files
 .idea/
+
+# Ignore auth token
+.npmrc
