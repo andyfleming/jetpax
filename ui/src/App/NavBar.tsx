@@ -8,7 +8,7 @@ import {
     NavbarHeading
 } from "@blueprintjs/core"
 import {connect} from "react-redux"
-import {RootState} from "./App/Store/makeStore"
+import {RootState} from "./Store/makeStore"
 import {NavLink} from "react-router-dom"
 
 type NavBarLinkProps = {

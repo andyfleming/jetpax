@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import NavBar from "../NavBar"
+import NavBar from "./NavBar"
 import {Redirect, Route, Switch} from "react-router"
 import PageNotFound from "./PageNotFound"
 import Dashboard from "../Dashboard/Dashboard"

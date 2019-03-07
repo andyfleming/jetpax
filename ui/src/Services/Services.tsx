@@ -1,8 +1,9 @@
 import * as React from 'react'
 import {HTMLSelect, HTMLTable} from "@blueprintjs/core"
+import ViewContainer from '../Shared/Layout/ViewContainer'
 
 const Services = () => (
-    <div>
+    <ViewContainer>
         <HTMLTable striped style={{width: '100%', maxWidth: '1024px'}}>
             <thead>
             <tr>
@@ -39,7 +40,7 @@ const Services = () => (
             </tr>
             </tbody>
         </HTMLTable>
-    </div>
+    </ViewContainer>
 )
 
 export default Services

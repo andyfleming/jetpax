@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react'
+import ViewContainer from '../Shared/Layout/ViewContainer'
 
 class PageNotFound extends PureComponent {
     render() {
-        return <div>Not Found</div>
+        return <ViewContainer>Not Found</ViewContainer>
     }
 }
 

@@ -1,9 +1,10 @@
 import * as React from 'react'
+import ViewContainer from '../Shared/Layout/ViewContainer'
 
 const Dashboard = () => (
-    <div>
+    <ViewContainer>
         Dashboard
-    </div>
+    </ViewContainer>
 )
 
 export default Dashboard
