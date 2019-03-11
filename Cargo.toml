@@ -1,0 +1,22 @@
+[package]
+name = "jetpax"
+version = "0.7.0"
+authors = ["Andy Fleming <andy@andyfleming.com>"]
+edition = "2018"
+license = "Apache-2.0"
+
+[[bin]]
+name = "jpx"
+path = "src/main.rs"
+
+[dependencies]
+colored = { git = "https://github.com/tforgione/colored.git", rev = "ba2074a1ed2e1d4bf85bc021caa15495c9fc57c2" }
+daemonize = "0.3.0"
+dirs = "1.0.5"
+rocket = "0.4.0"
+rust-embed = "4.3.0"
+
+[dependencies.rocket_contrib]
+version = "0.4.0"
+default-features = false
+features = ["serve"]

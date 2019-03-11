@@ -1,0 +1,11 @@
+[development]
+port = 8777
+log = "normal"
+
+[staging]
+port = 8777
+log = "normal"
+
+[production]
+port = 8777
+log = "normal"

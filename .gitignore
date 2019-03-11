@@ -86,3 +86,7 @@ typings/
 
 # Ignore auth token
 .npmrc
+
+# Ignore Rust artifact
+/target
+**/*.rs.bk
