@@ -15,7 +15,6 @@ import './index.scss'
 
 import getDefaultDependencies from "./App/Dependencies/getDefaultDependencies"
 import makeStore from "./App/Store/makeStore"
-import registerSubscribers from "./App/Subscriptions/registerSubscribers"
 import { DependencyProvider } from './App/Dependencies/DependencyContext'
 
 // import openSocket from 'socket.io-client'
@@ -27,9 +26,6 @@ import { DependencyProvider } from './App/Dependencies/DependencyContext'
 // }
 const deps = getDefaultDependencies()
 const store = makeStore(deps)
-
-// Register WS subscribers
-registerSubscribers(store, deps)
 
 ReactDOM.render(
     <DependencyProvider value={deps}>

@@ -3,10 +3,10 @@ import Dependencies from "./Dependencies"
 import ApiClient from './ApiClient'
 
 export default function getDefaultDependencies(): Dependencies {
-    const socket = openSocket('http://localhost:8777')
+    // const socket = openSocket('http://localhost:8777')
 
     return {
-        ws: socket,
+        // ws: socket,
         api: new ApiClient(),
     }
 }

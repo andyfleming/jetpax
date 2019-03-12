@@ -1,13 +1,7 @@
 use std::process;
 use daemonize::Daemonize;
-use rocket::response::content;
 use super::super::server::handlers;
 use rocket_contrib::serve::StaticFiles;
-
-#[get("/api/online.json")]
-fn online_json() -> content::Json<&'static str> {
-    content::Json(r#"{ "online": true }"#)
-}
 
 pub fn start(run_in_background: bool) {
     // TODO: handle startup concerns like ~/.jetpax directory existence
@@ -42,10 +36,9 @@ pub fn start(run_in_background: bool) {
         .mount("/", StaticFiles::from("ui/build"))
         .mount("/", routes![
             handlers::online::handle,
-            online_json,
-            pid,
+            handlers::pid::handle,
             handlers::ui::index,
-            handlers::ui::assets
+            handlers::ui::assets,
         ])
         .register(catchers![handlers::ui::rewrite_to_index])
         .launch();
