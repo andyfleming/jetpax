@@ -1,6 +1,6 @@
 #![feature(proc_macro_hygiene, decl_macro)]
-
 extern crate daemonize;
+extern crate diesel;
 extern crate dirs;
 #[macro_use] extern crate rocket;
 #[macro_use] extern crate rust_embed;

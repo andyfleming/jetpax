@@ -4,12 +4,18 @@ use super::super::server::handlers;
 use rocket_contrib::serve::StaticFiles;
 use rocket::State;
 use std::sync::{Mutex, Arc, RwLock};
-use core::borrow::Borrow;
+use rocket_contrib::databases::diesel;
+use rocket_contrib::database;
+use std::collections::HashMap;
+use rocket::config::{Config, Environment, Value};
 
 #[derive(Debug)]
 struct SystemState {
     count: RwLock<u32>
 }
+
+#[database("main_db")]
+struct MainDbConn(diesel::SqliteConnection);
 
 impl SystemState {
     fn new() -> SystemState {
@@ -36,20 +42,52 @@ fn increment_count(state: State<SystemState>) -> String {
     format!("Incremented Count")
 }
 
+#[get("/api/workspaces")]
+fn get_workspaces(conn: MainDbConn) -> String {
+    String::from("Hello")
+}
+
+fn get_dbs_config(home_dir: &str) -> HashMap<&str, Value> {
+    let mut database_config = HashMap::new();
+    let mut databases = HashMap::new();
+
+    database_config.insert("url", Value::from(format!("{}/.jetpax/db.sqlite", home_dir)));
+    databases.insert("main_db", Value::from(database_config));
+
+    return databases;
+}
+
+#[cfg(debug_assertions)]
+fn get_config(home_dir: &str) -> Config {
+    return Config::build(Environment::Development)
+        .extra("databases", get_dbs_config(home_dir))
+        .finalize()
+        .unwrap();
+}
+
+#[cfg(not(debug_assertions))]
+fn get_config(home_dir: &str) -> Config {
+    return Config::build(Environment::Production)
+        .extra("databases", get_dbs_config(home_dir))
+        .finalize()
+        .unwrap();
+}
 
 pub fn start(run_in_background: bool) {
     // TODO: handle startup concerns like ~/.jetpax directory existence
 
+    let home_dir = match dirs::home_dir() {
+        Some(path) => path.display().to_string(),
+        None => {
+            println!("Error getting the home dir.");
+            process::exit(1)
+        },
+    };
+
     if run_in_background {
         println!("Starting server as daemon...");
 
-        let home_dir = match dirs::home_dir() {
-            Some(path) => path.display().to_string(),
-            None => {
-                println!("Error getting the home dir.");
-                process::exit(1)
-            },
-        };
+
 
         let daemonize = Daemonize::new()
             .working_directory(&format!("{}/.jetpax/", home_dir));
@@ -68,7 +106,11 @@ pub fn start(run_in_background: bool) {
 
     let state = SystemState::new();
 
-    rocket::ignite()
+    let config = get_config(&home_dir);
+
+
+    rocket::custom(config)
+        .attach(MainDbConn::fairing())
         .mount("/", StaticFiles::from("ui/build"))
         .mount("/", routes![
             handlers::online::handle,
