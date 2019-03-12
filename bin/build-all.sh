@@ -10,8 +10,13 @@ if [[ "$(uname)" != "Darwin" ]]; then
     exit 1;
 fi;
 
-# Install UI dependencies from scratch
+# UI Tasks...
 cd ui
+
+# Remove existing build
+rm -rf build
+
+# Install UI dependencies from scratch
 npm ci
 
 # Test UI code
