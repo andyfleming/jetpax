@@ -60,6 +60,7 @@ fn get_dbs_config(home_dir: &str) -> HashMap<&str, Value> {
 #[cfg(debug_assertions)]
 fn get_config(home_dir: &str) -> Config {
     return Config::build(Environment::Development)
+        .port(8777)
         .extra("databases", get_dbs_config(home_dir))
         .finalize()
         .unwrap();
@@ -68,6 +69,7 @@ fn get_config(home_dir: &str) -> Config {
 #[cfg(not(debug_assertions))]
 fn get_config(home_dir: &str) -> Config {
     return Config::build(Environment::Production)
+        .port(8777)
         .extra("databases", get_dbs_config(home_dir))
         .finalize()
         .unwrap();
