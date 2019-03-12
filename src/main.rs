@@ -19,10 +19,15 @@ fn main() {
         process::exit(0);
     }
 
-    let sub_command = args[1].clone();
+    // Capture the sub-command (and convert aliases)
+    let sub_command = match args[1].as_ref() {
+        "--help" => "help",
+        "--version" => "version",
+        other => &other
+    };
 
     // Route command
-    match sub_command.as_ref() {
+    match sub_command {
         "down" => commands::down_command::run(),
         "init" => commands::init_command::run(),
         "up" => commands::up_command::run(&args),
