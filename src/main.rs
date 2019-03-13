@@ -36,6 +36,7 @@ fn main() {
         "init" => commands::init_command::run(),
         "up" => commands::up_command::run(&args),
         "help" => commands::help_command::run(),
+        "status" => commands::status_command::run(),
         "version" => commands::version_command::run(),
         "web" => commands::web_command::run(),
         other => output::print_err_message(&format!("Command \"{}\" not found.", other))

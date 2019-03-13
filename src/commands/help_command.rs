@@ -37,6 +37,13 @@ pub fn run() {
             "Stops the Jetpax server".hex_color(0xF9A619)
         )
     );
+    println_on_black(
+        &format!(
+            "    {}       {}                 ",
+            "status".hex_color(0xFEC908),
+            "Displays the status of the Jetpax server".hex_color(0xF9A619)
+        )
+    );
 //    logOnBlack(`    ${chalk.hex('#FEC908')('status')}       ${chalk.hex('#F9A619')(`Displays the status of the Jetpax server_support`)}`)
 //    logOnBlack(`    ${chalk.hex('#FEC908')('logs')}         ${chalk.hex('#F9A619')(`Tails the Jetpax server_support logs`)}`)
     println_on_black("                                                                          ");
