@@ -1,6 +1,7 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 extern crate daemonize;
-extern crate diesel;
+#[macro_use] extern crate diesel_migrations;
+#[macro_use] extern crate diesel;
 extern crate dirs;
 extern crate reqwest;
 #[macro_use] extern crate rocket;

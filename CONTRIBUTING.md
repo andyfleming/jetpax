@@ -4,29 +4,21 @@
 
 ## Developing the server
 
-In the root of the project, run
-
-```bash
-npm install
-npm start
-```
+TODO
 
 ## Developing the CLI
 
-In the root of project, run
+TODO
+
+## Developing the database
+
+Creating a migration
 
 ```bash
-./bin/cli.sh help
+diesel migration generate create_posts
 ```
 
-Or, to run anywhere, start watch-building and link the project
-
-```bash
-npm link .
-npm run watch
-# cd anywhere-else
-jpx version
-```
+For more, see http://diesel.rs/guides/getting-started/
 
 ## Developing the UI
 
@@ -40,12 +32,8 @@ npm start
 
 ## Releasing a new version
 
-Run the release script from the root of the project.
-
-```bash
-./bin/release.sh
-```
+TODO
 
 ## Contributing to Docs
 
-If viewing docs in the app, you need to re-run `npm start` for markdown changes to take effect.
+If viewing docs in the app, you need to re-run `npm start` in `/ui` for markdown changes to take effect.

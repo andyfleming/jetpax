@@ -1,15 +1,15 @@
-use std::process;
-use daemonize::Daemonize;
-use super::super::server::handlers;
-use super::super::api_client;
-use rocket_contrib::serve::StaticFiles;
-use rocket::State;
-use std::sync::RwLock;
-use rocket_contrib::databases::diesel;
-use rocket_contrib::database;
-use std::collections::HashMap;
-use rocket::config::{Config, Environment, Value};
+use crate::api_client;
+use crate::server::handlers;
 use crate::server::preflight;
+use daemonize::Daemonize;
+use rocket::config::{Config, Environment, Value};
+use rocket_contrib::database;
+use rocket_contrib::databases::diesel;
+use rocket::State;
+use std::collections::HashMap;
+use std::process;
+use std::fs::File;
+use std::sync::RwLock;
 
 #[derive(Debug)]
 struct SystemState {
@@ -53,6 +53,8 @@ fn get_dbs_config(home_dir: &str) -> HashMap<&str, Value> {
     let mut database_config = HashMap::new();
     let mut databases = HashMap::new();
 
+    println!("Database URL: {}", format!("{}/.jetpax/db.sqlite", home_dir));
+
     database_config.insert("url", Value::from(format!("{}/.jetpax/db.sqlite", home_dir)));
     databases.insert("main_db", Value::from(database_config));
 
@@ -86,7 +88,10 @@ pub fn start(run_in_background: bool) {
     }
 
     // Handle startup concerns with preflight
-    preflight::run();
+    preflight::run().unwrap_or_else(|e| {
+        println!("Error running startup preflight. Error: {}", e);
+        process::exit(1)
+    });
 
     let home_dir = match dirs::home_dir() {
         Some(path) => path.display().to_string(),
@@ -99,31 +104,38 @@ pub fn start(run_in_background: bool) {
     if run_in_background {
         println!("Starting server as daemon...");
 
+        let stdout = File::create(&format!("{}/.jetpax/server_daemon.out", home_dir)).unwrap_or_else(|e| {
+            eprintln!("Log file could not be created. Error: {}", e);
+            process::exit(1)
+        });
+        let stderr = File::create(&format!("{}/.jetpax/server_daemon.err", home_dir)).unwrap_or_else(|e| {
+            eprintln!("Log file could not be created. Error: {}", e);
+            process::exit(1)
+        });
 
-
-        let daemonize = Daemonize::new()
-            .working_directory(&format!("{}/.jetpax/", home_dir));
-
-        match daemonize.start() {
-            Ok(_) => println!("Process successfully daemonized."),
-            Err(e) => {
+        Daemonize::new()
+            .pid_file(&format!("{}/.jetpax/server_daemon.pid", home_dir))
+            .working_directory(&format!("{}/.jetpax/", home_dir))
+            .umask(0o000)
+//            .user("andyfleming")
+//            .group("staff")
+            .stdout(stdout)
+            .stderr(stderr)
+            .start()
+            .unwrap_or_else(|e| {
                 eprintln!("Process could not start as daemon! Error: {}", e);
                 process::exit(1)
-            },
-        }
+            });
 
     } else {
         println!("Starting server (in foreground)...");
     }
 
     let state = SystemState::new();
-
     let config = get_config(&home_dir);
-
 
     rocket::custom(config)
         .attach(MainDbConn::fairing())
-        .mount("/", StaticFiles::from("ui/build"))
         .mount("/", routes![
             handlers::online::handle,
             handlers::pid::handle,
