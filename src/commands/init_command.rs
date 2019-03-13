@@ -11,13 +11,10 @@ pub struct Workspace {
 }
 
 pub fn write_workspace_file(config: &Workspace) -> std::io::Result<()> {
-    let json = match serde_json::to_string(&config) {
-        Ok(json) => json,
-        Err(e) => {
-            println!("Error encoding JSON to write workspace config file.");
-            process::exit(1)
-        }
-    };
+    let json = serde_json::to_string(&config).unwrap_or_else(|_e| {
+        println!("Error encoding JSON to write workspace config file.");
+        process::exit(1)
+    });
 
     let mut file = File::create("workspace.jpx.json")?;
     file.write_all(&json.into_bytes())?;
@@ -31,13 +28,10 @@ pub fn run() {
             name: String::from("Example"),
         };
 
-        match write_workspace_file(&config) {
-            Ok(()) => {}
-            Err(e) => {
-                println!("workspace.jpx.json could not be written");
-                process::exit(1)
-            }
-        }
+        write_workspace_file(&config).unwrap_or_else(|_e| {
+            println!("workspace.jpx.json could not be written");
+            process::exit(1)
+        });
 
         println!("workspace.jpx.json successfully created")
     } else {
@@ -60,15 +54,15 @@ pub fn run() {
     */
 
     // TODO: offer to register workspace
-    if false {
-        let current_dir = match env::current_dir() {
-            Ok(path) => path.display().to_string(),
-            Err(e) => {
-                println!("Error getting the home dir.");
-                process::exit(1)
-            },
-        };
-    }
+//    if false {
+//        let current_dir = match env::current_dir() {
+//            Ok(path) => path.display().to_string(),
+//            Err(_e) => {
+//                println!("Error getting the home dir.");
+//                process::exit(1)
+//            },
+//        };
+//    }
 
     // TODO: if yes, send a command to register it based on the cwd
 

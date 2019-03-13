@@ -4,7 +4,7 @@ use super::super::server::handlers;
 use super::super::api_client;
 use rocket_contrib::serve::StaticFiles;
 use rocket::State;
-use std::sync::{Mutex, Arc, RwLock};
+use std::sync::RwLock;
 use rocket_contrib::databases::diesel;
 use rocket_contrib::database;
 use std::collections::HashMap;

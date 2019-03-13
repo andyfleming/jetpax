@@ -12,7 +12,7 @@ pub fn server_is_online() -> bool {
 
     match body {
         Ok(body) => body == "Jetpax Server API Online",
-        Err(e) => false
+        Err(_e) => false
     }
 }
 
