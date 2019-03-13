@@ -1,25 +1,48 @@
-use std::process::Command;
+use std::env;
+use std::fs::File;
+use std::io::prelude::*;
+use std::path::Path;
+use std::process;
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize)]
+pub struct Workspace {
+    name: String,
+}
+
+pub fn write_workspace_file(config: &Workspace) -> std::io::Result<()> {
+    let json = match serde_json::to_string(&config) {
+        Ok(json) => json,
+        Err(e) => {
+            println!("Error encoding JSON to write workspace config file.");
+            process::exit(1)
+        }
+    };
+
+    let mut file = File::create("workspace.jpx.json")?;
+    file.write_all(&json.into_bytes())?;
+    Ok(())
+}
 
 pub fn run() {
-    println!("Init command");
+    // Check if workspace.jpx.json already exists
+    if !Path::new("workspace.jpx.json").exists() {
+        let config = Workspace {
+            name: String::from("Example"),
+        };
 
-    let output = Command::new("ls")
-        .args(&["-l", "-a", "-h"])
-        .output()
-        .expect("ls command failed to start");
+        match write_workspace_file(&config) {
+            Ok(()) => {}
+            Err(e) => {
+                println!("workspace.jpx.json could not be written");
+                process::exit(1)
+            }
+        }
 
-    println!("Command stdout: {}", String::from_utf8(output.stdout).unwrap());
-
-    // If init, write the JSON file
-
-
-//    Command::new("ls")
-//        .arg("-l")
-//        .arg("-a")
-//        .spawn()
-//        .expect("ls command failed to start");
-
-    // TODO: Check if workspace.jpx.json already exists
+        println!("workspace.jpx.json successfully created")
+    } else {
+        println!("Workspace already initialized. (workspace.jpx.json found)")
+    }
 
     // TODO: If not, walk through creation
     /*
@@ -37,6 +60,15 @@ pub fn run() {
     */
 
     // TODO: offer to register workspace
+    if false {
+        let current_dir = match env::current_dir() {
+            Ok(path) => path.display().to_string(),
+            Err(e) => {
+                println!("Error getting the home dir.");
+                process::exit(1)
+            },
+        };
+    }
 
     // TODO: if yes, send a command to register it based on the cwd
 

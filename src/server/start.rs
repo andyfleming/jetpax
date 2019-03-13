@@ -1,6 +1,7 @@
 use std::process;
 use daemonize::Daemonize;
 use super::super::server::handlers;
+use super::super::api_client;
 use rocket_contrib::serve::StaticFiles;
 use rocket::State;
 use std::sync::{Mutex, Arc, RwLock};
@@ -8,6 +9,7 @@ use rocket_contrib::databases::diesel;
 use rocket_contrib::database;
 use std::collections::HashMap;
 use rocket::config::{Config, Environment, Value};
+use crate::server::preflight;
 
 #[derive(Debug)]
 struct SystemState {
@@ -76,7 +78,15 @@ fn get_config(home_dir: &str) -> Config {
 }
 
 pub fn start(run_in_background: bool) {
-    // TODO: handle startup concerns like ~/.jetpax directory existence
+
+    // Check if server is already running. If so, exit.
+    if api_client::server_is_online() {
+        println!("The server is already online.");
+        process::exit(0);
+    }
+
+    // Handle startup concerns with preflight
+    preflight::run();
 
     let home_dir = match dirs::home_dir() {
         Some(path) => path.display().to_string(),

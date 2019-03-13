@@ -2,9 +2,13 @@
 extern crate daemonize;
 extern crate diesel;
 extern crate dirs;
+extern crate reqwest;
 #[macro_use] extern crate rocket;
 #[macro_use] extern crate rust_embed;
+#[macro_use] extern crate serde;
+#[macro_use] extern crate serde_json;
 
+mod api_client;
 mod commands;
 mod output;
 mod server;
