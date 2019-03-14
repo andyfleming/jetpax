@@ -1,8 +1,8 @@
 table! {
-    posts (id) {
-        id -> Integer,
-        title -> Text,
-        body -> Text,
-        published -> Bool,
+    workspaces {
+        name -> Text,
+        path -> Text,
+        created_at -> Time,
+        updated_at -> Time,
     }
 }
