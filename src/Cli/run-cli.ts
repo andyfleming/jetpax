@@ -3,7 +3,6 @@
 import chalk from 'chalk'
 import splitArgs from "./ArgumentParsing/splitArgs"
 import getCommand from "./SubCommands/getCommand"
-import ServerApiHttp from "./API/ServerApiHttp"
 import api from "./API/api"
 
 async function runCli() {
