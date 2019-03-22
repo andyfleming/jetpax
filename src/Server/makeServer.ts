@@ -8,13 +8,13 @@ import Dependencies from "./Dependencies/Dependencies"
 import requestLoggerMiddleware from "./Logging/requestLoggerMiddleware"
 import WebSocketEventHandler from "./EventHandlers/WebSocketEventHandler"
 import MarcoHandler from "./EventHandlers/MarcoHandler"
-import getPid from "./Routes/getPid";
-import getWorkspaces from "./Routes/getWorkspaces";
-import getOnlineStatus from "./Routes/getOnlineStatus";
-import getDbKeys from "./Routes/getDbKeys";
-import getDbEntry from "./Routes/getDbEntry";
-import createWorkspace from "./Routes/createWorkspace";
-import deleteWorkspaceByPath from "./Routes/deleteWorkspaceByPath";
+import getPid from "./Routes/getPid"
+import getWorkspaces from "./Routes/getWorkspaces"
+import getOnlineStatus from "./Routes/getOnlineStatus"
+import getDbKeys from "./Routes/getDbKeys"
+import getDbEntry from "./Routes/getDbEntry"
+import createWorkspace from "./Routes/createWorkspace"
+import deleteWorkspaceByPath from "./Routes/deleteWorkspaceByPath"
 
 const makeServer = async (deps: Dependencies) => {
     const app = express()
@@ -85,7 +85,7 @@ const makeServer = async (deps: Dependencies) => {
             'socketId': socket.id,
         }, `A user connected via websockets`)
 
-        socket.on('disconnect', function(){
+        socket.on('disconnect', function() {
             deps.logger.debug({
                 'socketId': socket.id,
             }, `A user disconnected via websockets`)
@@ -102,7 +102,7 @@ const makeServer = async (deps: Dependencies) => {
     app.use(express.static(path.join(process.cwd(), 'ui/build')))
 
     // Fallback for rewrite to index.html
-    app.get('*', (req, res) =>{
+    app.get('*', (req, res) => {
         res.sendFile(path.join(process.cwd(), 'ui/build/index.html'))
     })
 
