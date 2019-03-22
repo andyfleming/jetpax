@@ -22,14 +22,14 @@ export default async function startContainer(image: string, options: StartContai
     // --expose list                    Expose a port or a range of ports
 
     // TODO: consider adding labels so we can query by these later
-    // -l, --label list                     Set meta data on a container
+    // -l, --label list                 Set meta data on a container
     // --label-file list                Read in a line delimited file of labels
 
     // TODO: consider linking/networking to other containers
     // --link list                      Add link to another container
     // --network string                 Connect a container to a network (default "default")
     // --network-alias list             Add network-scoped alias for the container
-    // -h, --hostname string                Container host name
+    // -h, --hostname string            Container host name
 
     // TODO: consider how we'll centralize / organize logs
     // --log-driver string              Logging driver for the container
