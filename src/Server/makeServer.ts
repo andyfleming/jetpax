@@ -4,137 +4,47 @@ import path from 'path'
 import {Server} from 'http'
 import socketIo from 'socket.io'
 import cors from 'cors'
-import _ from 'lodash'
 import Dependencies from "./Dependencies/Dependencies"
 import requestLoggerMiddleware from "./Logging/requestLoggerMiddleware"
 import WebSocketEventHandler from "./EventHandlers/WebSocketEventHandler"
 import MarcoHandler from "./EventHandlers/MarcoHandler"
+import getPid from "./Routes/getPid";
+import getWorkspaces from "./Routes/getWorkspaces";
+import getOnlineStatus from "./Routes/getOnlineStatus";
+import getDbKeys from "./Routes/getDbKeys";
+import getDbEntry from "./Routes/getDbEntry";
+import createWorkspace from "./Routes/createWorkspace";
+import deleteWorkspaceByPath from "./Routes/deleteWorkspaceByPath";
 
 const makeServer = async (deps: Dependencies) => {
     const app = express()
     const server = new Server(app)
     const io = socketIo(server)
 
+    // Handle CORS
     app.use(cors())
     app.options('*', cors())
 
+    // Body parsing...
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: false }))
-
-    // HTTP API Routes
-    // ------------------------------------------------------------------------------------
 
     // Log API calls
     app.use('/api/*', requestLoggerMiddleware(deps.logger))
 
-    app.get('/api/online', (req, res) => {
-        res.send('Jetpax Server API Online')
-    })
+    // HTTP API Routes
+    // ------------------------------------------------------------------------------------
 
-    app.get('/api/pid', (req, res) => {
-        res.send(`${process.pid}`)
-    })
+    app.get('/api/online', getOnlineStatus(deps))
+    app.get('/api/pid', getPid(deps))
+    app.get('/api/workspaces', getWorkspaces(deps))
+    app.get('/api/db/keys', getDbKeys(deps))
+    app.get('/api/db/entry', getDbEntry(deps))
+    app.post('/api/workspaces', createWorkspace(deps))
+    app.post('/api/workspaces/delete-by-path', deleteWorkspaceByPath(deps))
 
-    app.get('/api/workspaces', async (req, res) => {
-        const workspaces = await deps.collection('workspaces').getAll()
-
-        res.json({
-            data: workspaces,
-        })
-    })
-
-    app.get('/api/db/keys', async (req, res) => {
-        res.json({
-            data: await deps.kv.getAllKeys()
-        })
-    })
-
-    app.get('/api/db/entry', async (req, res) => {
-        const data = await deps.kv.get(req.query.key)
-
-        res.json({
-            data,
-        })
-    })
-
-    app.post('/api/workspaces', async (req, res) => {
-
-        const path = _.trimEnd(req.body.path, '/')
-        const name = req.body.name
-        const existingWorkspaces = await deps.collection('workspaces').getAll()
-        const workspaceAlreadyRegistered = (existingWorkspaces.filter(workspace => workspace.path === path).length > 0)
-
-        if (workspaceAlreadyRegistered) {
-            res.status(409)
-            res.json({
-                message: 'Workspace already registered',
-            })
-            return
-        }
-
-        if (!path) {
-            res.status(400)
-            res.json({
-                message: 'Workspace path cannot be blank',
-            })
-            return
-        }
-
-        if (!_.startsWith(path, '/')) {
-            res.status(400)
-            res.json({
-                message: 'Workspace path must be an absolute path starting with "/"',
-            })
-            return
-        }
-
-        // TODO: consider validating that the workspace directory exists
-
-        if (!name) {
-            res.status(400)
-            res.json({
-                message: 'Workspace name cannot be blank',
-            })
-            return
-        }
-
-        await deps.collection('workspaces').insert({
-            name,
-            path,
-        })
-
-        res.json({
-            message: 'Workspace successfully registered.',
-        })
-    })
-
-    app.post('/api/workspaces/delete-by-path', async (req, res) => {
-        // Attempt to get the ID of the workspace
-        const existingWorkspaces = await deps.collection('workspaces').getAll()
-
-        // If not found, return a 404
-        const workspace = existingWorkspaces.filter(workspace => workspace.path === req.body.path)
-
-        if (workspace.length === 0) {
-            res.status(404)
-            res.json({
-                message: 'Workspace not found.'
-            })
-            return
-        }
-
-        // Otherwise, delete it
-        await deps.collection('workspaces').delete(workspace[0].id)
-
-        res.json({
-            message: 'Workspace successfully deleted.'
-        })
-
-    })
-
-    app.all('/api/*', (req, res) => {
-        res.sendStatus(404)
-    })
+    // Fall back to a 404 if we are in the /api path
+    app.all('/api/*', (req, res) => { res.sendStatus(404) })
 
     // Web Socket Routes
     // ------------------------------------------------------------------------------------
