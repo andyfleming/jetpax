@@ -1,6 +1,8 @@
 import * as React from 'react'
 import {connect} from "react-redux";
 import {RootState} from "./Store/makeStore";
+import {Icon, NonIdealState} from "@blueprintjs/core";
+import {Link} from "react-router-dom";
 
 interface SimpleProjectListing {
     id: string
@@ -14,7 +16,17 @@ interface Props {
 
 const ProjectSelector = ({projects, selectProject}: Props) => {
     return <div>
-        select proj
+        {projects.length === 0 &&
+            <NonIdealState
+                icon="folder-open"
+                title="No projects registered."
+                description={<div>
+                    <p>Helpful docs:</p>
+                    <p><Link to="/docs/guides/creating-a-project"><Icon icon="document" /> Creating a project</Link></p>
+                    <p><Link to="/docs/guides/registering-a-project"><Icon icon="document" /> Registering a project</Link></p>
+                </div>}
+            />
+        }
         {projects.map(project => (
                 <div onClick={selectProject(project.id)}>{project.name}</div>
         ))}

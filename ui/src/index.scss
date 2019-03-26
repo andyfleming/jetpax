@@ -24,7 +24,22 @@ a {
   }
 }
 
+/**
+ Blueprint 3 Overrides
+ */
+
 .bp3-tag.bp3-intent-disabled {
   background: #c8d2da;
   color: #8e9da7;
+}
+
+// Non-ideal state icon
+.bp3-non-ideal-state-visual {
+  color: rgb(254, 192, 0);
+}
+
+
+// Heaidng color
+.bp3-heading {
+  color: #511f24;
 }
