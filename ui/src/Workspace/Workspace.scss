@@ -1,0 +1,12 @@
+.service-status-table {
+  width: 100%;
+  max-width: 1400px;
+
+  tbody tr td {
+      vertical-align: middle;
+
+    .bp3-control.bp3-switch:not(.bp3-align-right) .bp3-control-indicator {
+      vertical-align: -6px;
+    }
+    }
+}

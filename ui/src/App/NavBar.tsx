@@ -32,9 +32,10 @@ const NavBar = ({request, reply, event}: Props) => {
         <Navbar className={Classes.DARK}>
             <NavbarGroup align="left">
                 <NavbarHeading className="logo"/>
-                <NavBarLink path="/dashboard" icon="home" text="Dashboard" />
-                <NavBarLink path="/services" icon="applications" text="Services" />
-                <NavBarLink path="/assets" icon="compressed" text="Assets" />
+                {/*<NavBarLink path="/dashboard" icon="home" text="Dashboard" />*/}
+                <NavBarLink path="/workspace" icon="control" text="Workspace" />
+                {/*<NavBarLink path="/services" icon="applications" text="Services" />*/}
+                {/*<NavBarLink path="/assets" icon="compressed" text="Assets" />*/}
                 <NavBarLink path="/configuration" icon="code-block" text="Configuration" />
                 <NavBarLink path="/docs" icon="list-detail-view" text="Docs" />
             </NavbarGroup>

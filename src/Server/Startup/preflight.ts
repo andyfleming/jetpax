@@ -20,3 +20,6 @@ if (!fs.existsSync(jetpaxHome)) {
     execSync(`mkdir -p ${jetpaxHome}`)
 
 }
+
+// TODO: consider a version check from some file artifact to protect from accidental rollbacks
+// (this could happen if someone installed jetpax with a different version of node via nvm)
