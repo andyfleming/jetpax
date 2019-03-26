@@ -5,7 +5,7 @@ import {RouterProps, withRouter} from "react-router"
 import content from './content'
 import ReactMarkdown from "react-markdown"
 import {highlightAll} from "prismjs"
-import {Icon} from "@blueprintjs/core";
+import {Icon} from "@blueprintjs/core"
 
 type Props = RouterProps & {}
 

@@ -7,10 +7,10 @@ import JumpToMenu from "./JumpToMenu"
 import {GlobalHotKeys} from "react-hotkeys"
 import Doc from "../Docs/Doc"
 import Db from '../Dev/Db'
-import Services from "../Services/Services";
-import {connect} from "react-redux";
-import {RootState, SelectedProject} from "./Store/makeStore";
-import ProjectSelector from "./ProjectSelector";
+import Services from "../Services/Services"
+import {connect} from "react-redux"
+import {RootState, SelectedProject} from "./Store/makeStore"
+import ProjectSelector from "./ProjectSelector"
 
 const keyMap = {
     TOGGLE_JUMP_TO_MENU: ["command+k", "control+k"],

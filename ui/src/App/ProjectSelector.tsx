@@ -1,8 +1,8 @@
 import * as React from 'react'
-import {connect} from "react-redux";
-import {RootState} from "./Store/makeStore";
-import {Icon, NonIdealState} from "@blueprintjs/core";
-import {Link} from "react-router-dom";
+import {connect} from "react-redux"
+import {RootState} from "./Store/makeStore"
+import {Icon, NonIdealState} from "@blueprintjs/core"
+import {Link} from "react-router-dom"
 
 interface SimpleProjectListing {
     id: string
