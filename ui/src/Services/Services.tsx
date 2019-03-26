@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {Button, ButtonGroup, HTMLSelect, HTMLTable, Switch, Tag} from "@blueprintjs/core"
 import ViewContainer from '../Shared/Layout/ViewContainer'
-import './Workspace.scss'
+import './Services.scss'
 import {Intent} from "@blueprintjs/core/src/common/intent"
 
 type ServiceStatus = 'running' | 'stopped' | 'starting' | 'stopping' | 'crashed'
@@ -53,7 +53,7 @@ const getStatusTag = (status: ServiceStatus, statusText: string) => {
     return <Tag intent={getStatusTagIntent(status)} large>{statusText}</Tag>
 }
 
-const Workspace = () => (
+const Services = () => (
     <ViewContainer>
         <HTMLTable striped className="service-status-table">
             <thead>
@@ -115,5 +115,5 @@ const Workspace = () => (
     </ViewContainer>
 )
 
-export default Workspace
+export default Services
 

@@ -20,7 +20,7 @@ const options: JumpToOption[] = [
         path: '/dashboard',
     },
     {
-        title: 'Workspace',
+        title: 'Services',
         path: '/services',
     },
     {

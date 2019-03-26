@@ -33,17 +33,14 @@ const NavBar = ({request, reply, event}: Props) => {
             <NavbarGroup align="left">
                 <NavbarHeading className="logo"/>
                 {/*<NavBarLink path="/dashboard" icon="home" text="Dashboard" />*/}
-                <NavBarLink path="/workspace" icon="control" text="Workspace" />
-                {/*<NavBarLink path="/services" icon="applications" text="Services" />*/}
+                {/*<NavBarLink path="/workspace" icon="control" text="Workspace" />*/}
+                <NavBarLink path="/services" icon="applications" text="Services" />
                 {/*<NavBarLink path="/assets" icon="compressed" text="Assets" />*/}
                 <NavBarLink path="/configuration" icon="code-block" text="Configuration" />
                 <NavBarLink path="/docs" icon="list-detail-view" text="Docs" />
             </NavbarGroup>
             <NavbarGroup align="right">
-                <NavBarLink path="/settings" icon="settings" text="Settings" />
-                <Button className={`${Classes.MINIMAL} ${request && 'selected'}`} icon="cloud-upload" />
-                <Button className={`${Classes.MINIMAL} ${reply && 'selected'}`} icon="cloud-download" />
-                <Button className={`${Classes.MINIMAL} ${event && 'selected'}`} icon="satellite" />
+                <NavBarLink path="/settings" icon="random" text="Switch Project" />
             </NavbarGroup>
         </Navbar>
     )
