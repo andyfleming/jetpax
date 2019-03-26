@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ReactNode } from 'react'
+import {ReactNode, ReactNodeArray} from 'react'
 import './ViewContainer.scss'
 
 interface Props {

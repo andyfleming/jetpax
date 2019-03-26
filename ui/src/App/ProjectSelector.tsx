@@ -1,8 +1,9 @@
 import * as React from 'react'
 import {connect} from "react-redux"
 import {RootState} from "./Store/makeStore"
-import {Icon, NonIdealState} from "@blueprintjs/core"
+import {Button, ButtonGroup, Icon, NonIdealState} from "@blueprintjs/core"
 import {Link} from "react-router-dom"
+import ViewContainer from "../Shared/Layout/ViewContainer";
 
 interface SimpleProjectListing {
     id: string
@@ -15,22 +16,26 @@ interface Props {
 }
 
 const ProjectSelector = ({projects, selectProject}: Props) => {
-    return <div>
+    return <ViewContainer>
         {projects.length === 0 &&
-            <NonIdealState
-                icon="folder-open"
-                title="No projects registered."
-                description={<div>
-                    <p>Helpful docs:</p>
-                    <p><Link to="/docs/guides/creating-a-project"><Icon icon="document" /> Creating a project</Link></p>
-                    <p><Link to="/docs/guides/registering-a-project"><Icon icon="document" /> Registering a project</Link></p>
-                </div>}
-            />
+            <div style={{marginTop: 40}}>
+                <NonIdealState
+                    icon="folder-open"
+                    title="No projects registered."
+                    description={<div>
+                        <p>Helpful docs:</p>
+                        <p><Link to="/docs/guides/creating-a-project"><Icon icon="document" /> Creating a project</Link></p>
+                        <p><Link to="/docs/guides/registering-a-project"><Icon icon="document" /> Registering a project</Link></p>
+                    </div>}
+                />
+            </div>
         }
+        <ButtonGroup vertical minimal={false} alignText="left" large>
         {projects.map(project => (
-                <div onClick={selectProject(project.id)}>{project.name}</div>
+            <Button onClick={selectProject(project.id)} icon="circle-arrow-right">{project.name}</Button>
         ))}
-    </div>
+        </ButtonGroup>
+    </ViewContainer>
 }
 
 export default connect((state: RootState) => {

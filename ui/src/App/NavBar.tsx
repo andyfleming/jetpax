@@ -37,17 +37,17 @@ class NavBar extends React.PureComponent<Props> {
                     <NavbarHeading className="logo"/>
                     {!projectIsSelected && <NavBarLink path="/select-project" icon="folder-open" text="Select Project" />}
                     {/*{projectIsSelected && <NavBarLink path="/dashboard" icon="home" text="Dashboard" />}*/}
-                    {projectIsSelected && <NavBarLink path="/workspace" icon="control" text="Workspace" />}
+                    {/*{projectIsSelected && <NavBarLink path="/workspace" icon="control" text="Workspace" />}*/}
                     {projectIsSelected && <NavBarLink path="/services" icon="applications" text="Services"/>}
-                    {projectIsSelected && <NavBarLink path="/assets" icon="compressed" text="Assets" />}
+                    {/*{projectIsSelected && <NavBarLink path="/assets" icon="compressed" text="Assets" />}*/}
                     {projectIsSelected && <NavBarLink path="/configuration" icon="code-block" text="Configuration"/>}
-                    <NavBarLink path="/docs" icon="list-detail-view" text="Docs"/>
                 </NavbarGroup>
                 <NavbarGroup align="right">
+                    <NavBarLink path="/docs" icon="list-detail-view" text="Docs"/>
                     {selectedProjectId !== null &&
-                    <>
+                    <NavLink to="/select-project" activeClassName="selected">
                         <Button className={Classes.MINIMAL} icon="random" text="Switch Project" onClick={clearSelectedProject} />
-                    </>
+                    </NavLink>
                     }
                 </NavbarGroup>
             </Navbar>
