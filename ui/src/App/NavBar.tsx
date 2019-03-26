@@ -8,8 +8,8 @@ import {
     NavbarHeading
 } from "@blueprintjs/core"
 import {connect} from "react-redux"
-import {RootState} from "./Store/makeStore"
-import {NavLink} from "react-router-dom"
+import {RootState, SelectedProject} from "./Store/makeStore"
+import {NavLink, RouteComponentProps, withRouter} from "react-router-dom"
 
 type NavBarLinkProps = {
     path: string
@@ -21,35 +21,51 @@ const NavBarLink = ({path, icon, text}: NavBarLinkProps) => (
     <NavLink to={path} activeClassName="selected"><Button className={Classes.MINIMAL} icon={icon} text={text} /></NavLink>
 )
 
-type Props = {
-    request: boolean
-    reply: boolean
-    event: boolean
+type Props = RouteComponentProps & {
+    selectedProjectId: SelectedProject,
+    clearSelectedProject: () => void
 }
 
-const NavBar = ({request, reply, event}: Props) => {
-    return (
-        <Navbar className={Classes.DARK}>
-            <NavbarGroup align="left">
-                <NavbarHeading className="logo"/>
-                {/*<NavBarLink path="/dashboard" icon="home" text="Dashboard" />*/}
-                {/*<NavBarLink path="/workspace" icon="control" text="Workspace" />*/}
-                <NavBarLink path="/services" icon="applications" text="Services" />
-                {/*<NavBarLink path="/assets" icon="compressed" text="Assets" />*/}
-                <NavBarLink path="/configuration" icon="code-block" text="Configuration" />
-                <NavBarLink path="/docs" icon="list-detail-view" text="Docs" />
-            </NavbarGroup>
-            <NavbarGroup align="right">
-                <NavBarLink path="/settings" icon="random" text="Switch Project" />
-            </NavbarGroup>
-        </Navbar>
-    )
-}
+class NavBar extends React.PureComponent<Props> {
+    render() {
+        const {clearSelectedProject, selectedProjectId} = this.props
+        const projectIsSelected = (selectedProjectId !== null)
 
-export default connect((state: RootState) => {
-    return {
-        request: state.webSocketActivity.request,
-        reply: state.webSocketActivity.reply,
-        event: state.webSocketActivity.event,
+        return (
+            <Navbar className={Classes.DARK}>
+                <NavbarGroup align="left">
+                    <NavbarHeading className="logo"/>
+                    {!projectIsSelected && <NavBarLink path="/select-project" icon="folder-open" text="Select Project" />}
+                    {/*{projectIsSelected && <NavBarLink path="/dashboard" icon="home" text="Dashboard" />}*/}
+                    {projectIsSelected && <NavBarLink path="/workspace" icon="control" text="Workspace" />}
+                    {projectIsSelected && <NavBarLink path="/services" icon="applications" text="Services"/>}
+                    {projectIsSelected && <NavBarLink path="/assets" icon="compressed" text="Assets" />}
+                    {projectIsSelected && <NavBarLink path="/configuration" icon="code-block" text="Configuration"/>}
+                    <NavBarLink path="/docs" icon="list-detail-view" text="Docs"/>
+                </NavbarGroup>
+                <NavbarGroup align="right">
+                    {selectedProjectId !== null &&
+                    <>
+                        <Button className={Classes.MINIMAL} icon="random" text="Switch Project" onClick={clearSelectedProject} />
+                    </>
+                    }
+                </NavbarGroup>
+            </Navbar>
+        )
+
     }
-}, null, null, { pure: false})(NavBar)
+}
+
+export default withRouter(connect((state: RootState) => {
+    return {
+        selectedProjectId: state.selectedProject,
+    }
+}, (dispatch) => {
+    return {
+        clearSelectedProject: () => {
+            dispatch({
+                type: 'CLEAR_SELECTED_PROJECT',
+            })
+        }
+    }
+})(NavBar))

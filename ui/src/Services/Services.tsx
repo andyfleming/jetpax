@@ -75,13 +75,14 @@ const Services = () => (
 
                 return (
                 <tr key={index}>
-                    <td style={{textAlign: 'center'}}><Switch inline checked={true} disabled={!startable} /></td>
+                    <td style={{textAlign: 'center'}}><Switch inline checked={true} onChange={(e) => {}} disabled={!startable} /></td>
                     <td>{getStatusTag(service.status, service.statusText)}</td>
                     <td>{service.name}</td>
                     <td>
                         <HTMLSelect
                             disabled={!['crashed', 'stopped'].includes(service.status)}
                             value={service.modeSelected}
+                            onChange={(e) => {}}
                             options={service.modesAvailable.map(mode => ({
                                 value: mode,
                                 label: mode,

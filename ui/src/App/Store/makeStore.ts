@@ -5,55 +5,20 @@ import Dependencies from '../Dependencies/Dependencies'
 import {PlatformState} from "./PlatformState/PlatformState";
 import initialPlatformState from "./PlatformState/initialPlatformState";
 
-type WebSocketActivityState = {
-    request: boolean
-    reply: boolean
-    event: boolean
-}
+export type SelectedProject = string | null
 
-const initialWebSocketActivityState: WebSocketActivityState = {
-    request: false,
-    reply: false,
-    event: false,
-}
-
-function webSocketActivity(state: WebSocketActivityState = initialWebSocketActivityState, action: AnyAction): WebSocketActivityState {
+function selectedProject(state: SelectedProject = null, action: AnyAction) {
     switch (action.type) {
-        case 'TX_MARCO':
-            return {
-                ...state,
-                request: true,
-            }
-        case 'TX_MARCO_OVER':
-            return {
-                ...state,
-                request: false,
-            }
-        case 'RX_POLO':
-            return {
-                ...state,
-                reply: true,
-            }
-        case 'RX_POLO_OVER':
-            return {
-                ...state,
-                reply: false,
-            }
-        case 'RX_BOOP':
-            return {
-                ...state,
-                event: true,
-            }
-        case 'RX_BOOP_OVER':
-            return {
-                ...state,
-                event: false,
-            }
+        case 'SELECT_PROJECT':
+            return action.id
+
+        case 'CLEAR_SELECTED_PROJECT':
+            return null
+
+        default:
+            return state
     }
-
-    return state
 }
-
 
 function platformState(state: PlatformState = initialPlatformState, action: AnyAction) {
     if (action.type === 'PLATFORM_STATE_UPDATE') {
@@ -67,13 +32,13 @@ function platformState(state: PlatformState = initialPlatformState, action: AnyA
 
 export type RootState = {
     platformState: PlatformState
-    webSocketActivity: WebSocketActivityState
+    selectedProject: SelectedProject
 }
 
 export default function makeStore(deps: Dependencies, initialState?: object): Store<RootState, AnyAction> {
     const rootReducer = combineReducers({
         platformState,
-        webSocketActivity,
+        selectedProject,
     })
     const middleware = composeWithDevTools(applyMiddleware(
         thunk.withExtraArgument(deps) as ThunkMiddleware<RootState, AnyAction, Dependencies>,
