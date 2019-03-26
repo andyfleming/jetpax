@@ -74,10 +74,16 @@ const makeServer = async (deps: Dependencies) => {
         })
     }
 
-    setInterval(() => {
-        emitToAll('boop', { boop: 'yeah' })
-    }, 3710)
+    deps.psm.onUpdate((newState) => {
+        emitToAll('platformStateUpdate', newState)
+    })
 
+    setInterval(() => {
+        deps.psm.update(state => ({
+            ...state,
+            count: state.count + 1,
+        }))
+    }, 3000)
 
     io.on('connection', function(socket) {
 

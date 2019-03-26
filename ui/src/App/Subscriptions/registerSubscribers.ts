@@ -1,38 +1,15 @@
 import {Store} from "redux"
 import {RootState} from "../Store/makeStore"
 import Dependencies from "../Dependencies/Dependencies"
+import {PlatformState} from "../Store//PlatformState/PlatformState";
 
 export default function registerSubscribers(store: Store<RootState, any>, {ws}: Dependencies) {
-    ws.on('polo', () => {
+    ws.on('platformStateUpdate', (data: PlatformState) => {
+        console.log('web socket event RX: platformStateUpdate. Data:')
+        console.log(data)
         store.dispatch({
-            type: 'RX_POLO',
+            type: 'PLATFORM_STATE_UPDATE',
+            state: data
         })
-        setTimeout(() => {
-            store.dispatch({
-                type: 'RX_POLO_OVER',
-            })
-        }, 300)
     })
-    ws.on('boop', () => {
-        store.dispatch({
-            type: 'RX_BOOP',
-        })
-        setTimeout(() => {
-            store.dispatch({
-                type: 'RX_BOOP_OVER',
-            })
-        }, 300)
-    })
-
-    setInterval(() => {
-        ws.emit('marco', {data: true})
-        store.dispatch({
-            type: 'TX_MARCO',
-        })
-        setTimeout(() => {
-            store.dispatch({
-                type: 'TX_MARCO_OVER',
-            })
-        }, 300)
-    }, 2370)
 }

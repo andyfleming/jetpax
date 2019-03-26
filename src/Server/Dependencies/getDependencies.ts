@@ -2,6 +2,7 @@ import {makeLogger} from "../Logging/makeLogger"
 import {makeLevelStore} from "../Persistence/LevelStore"
 import Dependencies from "./Dependencies"
 import collection from "../Persistence/collection"
+import PlatformStateManager from "./PlatformStateManager";
 
 
 export default async function getDependencies(): Promise<Dependencies> {
@@ -12,5 +13,6 @@ export default async function getDependencies(): Promise<Dependencies> {
         kv,
         logger,
         collection: collection(kv),
+        psm: new PlatformStateManager()
     }
 }
