@@ -9,12 +9,12 @@ import requestLoggerMiddleware from "./Logging/requestLoggerMiddleware"
 import WebSocketEventHandler from "./EventHandlers/WebSocketEventHandler"
 import MarcoHandler from "./EventHandlers/MarcoHandler"
 import getPid from "./Routes/getPid"
-import getWorkspaces from "./Routes/getWorkspaces"
+import getProjects from "./Routes/getProjects"
 import getOnlineStatus from "./Routes/getOnlineStatus"
 import getDbKeys from "./Routes/getDbKeys"
 import getDbEntry from "./Routes/getDbEntry"
-import createWorkspace from "./Routes/createWorkspace"
-import deleteWorkspaceByPath from "./Routes/deleteWorkspaceByPath"
+import registerProject from "./Routes/registerProject"
+import deregisterProjectByPath from "./Routes/deregisterProjectByPath"
 
 const makeServer = async (deps: Dependencies) => {
     const app = express()
@@ -37,11 +37,11 @@ const makeServer = async (deps: Dependencies) => {
 
     app.get('/api/online', getOnlineStatus(deps))
     app.get('/api/pid', getPid(deps))
-    app.get('/api/workspaces', getWorkspaces(deps))
+    app.get('/api/projects', getProjects(deps))
     app.get('/api/db/keys', getDbKeys(deps))
     app.get('/api/db/entry', getDbEntry(deps))
-    app.post('/api/workspaces', createWorkspace(deps))
-    app.post('/api/workspaces/delete-by-path', deleteWorkspaceByPath(deps))
+    app.post('/api/projects', registerProject(deps))
+    app.post('/api/projects/delete-by-path', deregisterProjectByPath(deps))
 
     // Fall back to a 404 if we are in the /api path
     app.all('/api/*', (req, res) => { res.sendStatus(404) })

@@ -15,7 +15,7 @@
     "jetpacks"
   ],
   "bin": {
-    "jpx": "build/Cli/run-cli.js"
+    "jpx": "build/src/Cli/run-cli.js"
   },
   "scripts": {
     "start": "ts-node-dev --respawn --transpileOnly src/Server/run-server.ts",

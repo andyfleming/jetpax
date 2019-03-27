@@ -7,18 +7,18 @@ import OpenWebUiCommand from "./UI/OpenWebUiCommand"
 import StopServerCommand from "./Server/StopServerCommand"
 import TailServerLogsCommand from "./Server/TailServerLogsCommand"
 import ServerStatusCommand from "./Server/ServerStatusCommand"
-import RegisterWorkspaceCommand from "./Workspaces/RegisterWorkspaceCommand"
-import DeregisterWorkspaceCommand from "./Workspaces/DeregisterWorkspaceCommand"
-import InitializeWorkspaceCommand from "./Workspaces/InitializeWorkspaceCommand"
+import RegisterProjectCommand from "./Projects/RegisterProjectCommand"
+import DeregisterProjectCommand from "./Projects/DeregisterProjectCommand"
+import InitializeProjectCommand from "./Projects/InitializeProjectCommand"
 
 const commands: Command[] = [
-    DeregisterWorkspaceCommand,
+    DeregisterProjectCommand,
     GetVersionCommand,
     HelpCommand,
-    InitializeWorkspaceCommand,
+    InitializeProjectCommand,
     OpenWebUiCommand,
     OpenUiCommand,
-    RegisterWorkspaceCommand,
+    RegisterProjectCommand,
     StartServerCommand,
     ServerStatusCommand,
     StopServerCommand,

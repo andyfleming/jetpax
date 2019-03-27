@@ -1,8 +1,8 @@
 import BaseEntity from "./BaseEntity"
 
-type Workspace = BaseEntity & {
+type Project = BaseEntity & {
     path: string
     name: string
 }
 
-export default Workspace
+export default Project

@@ -1,6 +1,6 @@
 import KeyValueStore from "./KeyValueStore"
 import uuid = require("uuid/v4")
-import Workspace from "./Entities/Workspace"
+import Project from "./Entities/Project"
 import BaseEntity from "./Entities/BaseEntity"
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
@@ -10,7 +10,7 @@ function isoDate() {
 }
 
 export interface CollectionFactory {
-    (collectionName: 'workspaces'): Collection<Workspace>
+    (collectionName: 'projects'): Collection<Project>
 }
 
 class Collection<T extends BaseEntity> {

@@ -1,8 +1,8 @@
 import {AxiosInstance} from "axios"
 import serverUrl from "../../Common/serverUrl"
 
-export class WorkspaceAlreadyRegisteredError extends Error {}
-export class WorkspaceNotFoundError extends Error {}
+export class ProjectAlreadyRegisteredError extends Error {}
+export class ProjectNotFoundError extends Error {}
 
 class ServerApiHttp {
     constructor(
@@ -21,15 +21,15 @@ class ServerApiHttp {
         }
     }
 
-    async registerWorkspace(path: string, name: string) {
+    async registerProject(path: string, name: string) {
         try {
-            await this.http.post(`/workspaces`, {
+            await this.http.post(`/projects`, {
                 path,
                 name,
             })
         } catch (err) {
             if (err.response && err.response.status && err.response.status === 409) {
-                throw new WorkspaceAlreadyRegisteredError()
+                throw new ProjectAlreadyRegisteredError()
             } else if (err.response && err.response.data && err.response.data.message) {
                 throw new Error(err.response.data.message)
             } else {
@@ -38,14 +38,14 @@ class ServerApiHttp {
         }
     }
 
-    async deregisterWorkspace(path: string) {
+    async deregisterProject(path: string) {
         try {
-            await this.http.post('/workspaces/delete-by-path', {
+            await this.http.post('/projects/delete-by-path', {
                 path,
             })
         } catch (err) {
             if (err.response && err.response.status && err.response.status === 404) {
-                throw new WorkspaceNotFoundError()
+                throw new ProjectNotFoundError()
             } else {
                 throw new Error('Request failed')
             }
