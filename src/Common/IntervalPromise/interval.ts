@@ -2,14 +2,14 @@ import wait from "./wait"
 
 interface FuncParams {
     iteration: number
-    clearInterval: ClearIntervalPromse
+    clearInterval: ClearIntervalPromise
 }
 
 interface Func {
     (params: FuncParams): Promise<any>
 }
 
-interface ClearIntervalPromse {
+interface ClearIntervalPromise {
     (): void
 }
 
@@ -31,7 +31,7 @@ const defaults: IntervalConfig = {
     iterations: Infinity
 }
 
-export default function interval(func: Func, intervalLength: IntervalLengthOption, options: IntervalOptions = {}): ClearIntervalPromse {
+export default function interval(func: Func, intervalLength: IntervalLengthOption, options: IntervalOptions = {}): ClearIntervalPromise {
     const config = {
         ...defaults,
         ...options,

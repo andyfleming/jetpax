@@ -64,7 +64,7 @@ const Services = () => (
                 <th>Mode</th>
                 <th style={{width: '100px'}}>Manager</th>
                 <th style={{width: '200px'}}>Actions</th>
-                <th style={{width: '140px'}}>Logs</th>
+                {/*<th style={{width: '140px'}}>Logs</th>*/}
             </tr>
             </thead>
             <tbody>
@@ -97,7 +97,7 @@ const Services = () => (
                             {restartable && <Button icon="refresh">Restart</Button>}
                         </ButtonGroup>
                     </td>
-                    <td><Button icon="application" minimal>View Logs</Button></td>
+                    {/*<td><Button icon="application" minimal>View Logs</Button></td>*/}
                 </tr>
                 )
             })}
@@ -108,7 +108,7 @@ const Services = () => (
                 <td/>
                 <td/>
                 <td/>
-                <td/>
+                {/*<td/>*/}
             </tr>
 
             </tbody>

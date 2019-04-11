@@ -18,9 +18,7 @@ interface RetryConfig {
     maxAttempts: number
 }
 
-interface RetryOptions {
-    maxAttempts?: number
-}
+type RetryOptions = Partial<RetryConfig>
 
 const defaults: RetryConfig = {
     maxAttempts: Infinity
